@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="https://d2fs58k4ez69fv.cloudfront.net/88db157d41d3d3263d8de9701eda6df5a268b2911e5a60f1dd25b0b6c509cba5" />
+	<meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+</style>
+	<title>Is It Love?</title>
+
+	<script>
+        
+        //pass URL patameters into local variables
+        var param = getURLParameters(document.URL);
+        var country = param['country'];
+        var language = param['language'];
+        var dnaid = unescape(param['dnaID']);
+        var payer = param['payer'].toLowerCase();;
+        var ingameid = param['ingameID'];
+        var fbid = param['fbId'];
+        var bundleid = param['bundleId'];
+        var platform = param['platform'];  
+        var progression = unescape(param['progression']);
+        var device = unescape(param['device']);
+        device = device.replace(/[&\/\\#,+()$~%'â€":*?<>{}]/g,'')
+        var model = unescape(param['model']);
+        var osversion = unescape(param['osversion']);
+        
+                //other variables
+        var hsappid = "";
+        var hsapp = "";
+        var custom_button_label = "";
+        var userMessage = "I need to speak with you";
+        var unread = 0;
+        var hs_faq_platform = ""
+        
+        //default lang to EN is lang is not supplied or not supported (important for Contact Us button)
+        if (language == null)
+        {language = 'en'}
+        var supported_languages = ["en","fr","de","pt","es","it"]
+        if (supported_languages.includes(language) == false)
+        {language = 'en'}
+
+        
+        //handle platform
+        switch (platform){
+            case "Android":
+                hs_faq_platform="android"
+                break;
+             case "IPhonePlayer":
+                hs_faq_platform="ios"
+                break;
+            default:
+                hs_faq_platform="ios"
+        }
+        
+        
+        
+        //other variables
+        var hsappid = "";
+        var hsapp = "";
+        var custom_button_label = "";
+        var userMessage = "I need to speak with you";
+        var unread = 0;
+        
+        //fill game specific variables
+        switch (bundleid){
+            case "net.isitlove.cartercorp.ryan":
+                hsappid = "ubisoft-mobile_platform_20200901202520185-517577612635555";
+                hsapp = "is-it-love-ryan";
+                break;
+            case "net.isitlove.secretpalace.james":
+                hsappid = "ubisoft-mobile_platform_20200901202653950-590f633c7dd3118";
+                hsapp = "is-it-love-james";
+                break;
+             case "net.isitlove.cartercorp.jake":
+                hsappid = "ubisoft-mobile_platform_20200901202843571-8a81751f33d153e";
+                hsapp = "is-it-love-jake";
+                break;
+            default:
+                hsappid = "ubisoft-mobile_platform_20200826084403003-d9262b676965e0d";
+                hsapp = "is-it-love"; 
+        }
+        
+        
+        
+        
+        
+        
+        
+//function to get URL parameters
+function getURLParameters(url) {
+
+  var result = {};
+  var searchIndex = url.indexOf("?");
+  if (searchIndex == -1 ) return result;
+  var sPageURL = url.substring(searchIndex +1);
+  var sURLVariables = sPageURL.split('&');
+  for (var i = 0; i < sURLVariables.length; i++)
+  {
+    var sParameterName = sURLVariables[i].split('=');
+    result[sParameterName[0]] = sParameterName[1];
+  }
+  return result;
+}
+
+//function to open Helpshift, from the Contact Us button
+function openHelpshift() {
+ Helpshift("setInitialUserMessage", userMessage);
+   Helpshift("show");
+   Helpshift("open");
+   
+}
+        
+        
+        
+    </script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    
+    
+<style>
+    
+    
+    .center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+    
+ .notification {
+    color: #ffffff;
+     font-size: 15px;
+    background: #c9576d;
+  text-decoration: none;
+  padding: 5px;
+  position: fixed;
+  display: inline-block;
+    height: 45px;
+     width:130px;
+  border-radius: 24px;
+     font-family: Roboto !important;
+     font-weight: bold;
+    border: none;
+left: 50%;
+  bottom: 1%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+    font-family: Roboto;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}   
+    
+    
+    
+    
+    
+    </style>
+    
+    
+
+</head>
+<body style="margin-top: -20px;margin-right:0;margin-left:0">
+<h1 style="font-size: 16px;text-align: center;font-family: Roboto; font-weight: bold; padding-top: 40px;padding-bottom: 20px;background-color:#0C1921;color:#b9cad3;margin-top: 0px;margin-bottom: 0px;">Faqs</h1>
+<button style="font-family: Roboto!important" class="notification" onclick="openHelpshift()" type="button">
+    <span>Inbox</span>
+    <span class="badge">0</span>
+    </button>
+
+    
+    
+    
+<iframe id='hs-support-frame' width=100% height=880px frameborder='0'></iframe>
+    
+
+
+    
+ <script>
+//Pass the app, platform and language in from the URL parameters to form the Web Support Portal URL
+  document.getElementById("hs-support-frame").src = "https://ubisoft-mobile.helpshift.com/a/" + hsapp + "/?p=" + hs_faq_platform + "&l=" + language
+     
+//Handle label of custom Contact Us buuton   
+switch (language){
+            case "fr":
+                custom_button_label = "Nous contacter";
+                userMessage = "J'ai besoin de vous contacter"
+                break;
+            case "de":
+                custom_button_label = "kontaktieren Sie uns";
+                userMessage = "Ich muss dich kontaktieren"
+                break;
+            case "es":
+                custom_button_label = "Contáctanos";
+                userMessage = "Necesito contactarte"
+                break;
+            case "it":
+                custom_button_label = "Contattaci";
+                userMessage = "Ho bisogno di contattarti"
+                break;
+            case "pt":
+                custom_button_label = "Contate-Nos";
+                userMessage = "Eu preciso entrar em contato com você"
+                break;
+            case "ru":
+                custom_button_label = "Связаться";
+                userMessage = "Мне нужно с тобой связаться"
+                break;
+            case "en":
+                custom_button_label = "Contact Us";
+                userMessage = "I need to contact you"
+                break;
+        }    
+var label = document.getElementsByClassName("notification");
+label[0].children[0].innerText = custom_button_label;
+label[0].children[1].hidden = true;
+console.log(label)
+</script>   
+
+<script>
+//Helpshift Web Chat
+    (function () {
+    var PLATFORM_ID = hsappid,
+    DOMAIN = "ubisoft-mobile",
+    LANGUAGE = language;
+
+    window.helpshiftConfig = {
+      platformId: PLATFORM_ID,
+      domain: DOMAIN,
+      language: LANGUAGE,
+      userId: dnaid, 
+      userName: dnaid,
+
+  uiConfig: {
+    global: {
+      color: "#153141", 
+      fontFamily: "Roboto, Helvetica, sans-serif"
+    }
+  }
+        
+    };
+  }) ();
+
+
+  !function(t,e){if("function"!=typeof window.Helpshift){var n=function(){n.q.push(arguments)};n.q=[],window.Helpshift=n;var i,a=t.getElementsByTagName("script")[0];if(t.getElementById(e))return;i=t.createElement("script"),i.async=!0,i.id=e,i.src="https://webchat.helpshift.com/webChat.js";var o=function(){window.Helpshift("init")};window.attachEvent?i.attachEvent("onload",o):i.addEventListener("load",o,!1),a.parentNode.insertBefore(i,a)}else window.Helpshift("update")}(document,"hs-chat");
+ 
+    //Hide Helpshift by default, as we'll use a custom button
+ Helpshift("setInitialUserMessage", userMessage)
+  Helpshift("close");
+  Helpshift("hide");
+    
+ //If the widget is opened and then closed (lisening to the event handler)
+ var widgetToggleEventHandler = function(data) {
+  if (data.visible == false)
+    {Helpshift("hide")}
+     
+     
+}
+
+//Event handler to listen for web chat widget changes
+Helpshift("addEventListener", "widgetToggle", widgetToggleEventHandler);
+    
+
+//Event for unread messagages (update custom button badge)
+var newUnreadMessagesEventHandler = function(data) {
+if (data.unreadCount > 0)    
+{label[0].children[1].hidden = false;
+ label[0].children[1].innerText = data.unreadCount}
+else
+{label[0].children[1].hidden = true}
+}
+Helpshift("addEventListener", "newUnreadMessages", newUnreadMessagesEventHandler);
+    
+    
+
+
+//Fill the custom issue fields with the URL parameters (via the local variables)
+Helpshift("setCustomIssueFields", 
+{
+      "country": {
+   type: "singleline",
+   value: country},
+    "user_language": {
+   type: "dropdown",
+   value: language},
+    "dnaid": {
+   type: "ingameid",
+   value: dnaid},
+     "payer": {
+   type: "checkbox",
+   value: payer},
+    "ingameid": {
+   type: "singleline",
+   value: ingameid},
+    "fbid": {
+   type: "singleline",
+   value: fbid},
+    "fbid": {
+   type: "singleline",
+   value: fbid},
+    "bundleid": {
+   type: "singleline",
+   value: bundleid},
+    "progression": {
+   type: "singleline",
+   value: progression},
+    "platform": {
+   type: "dropdown",
+   value: platform},
+    "platform": {
+   type: "dropdown",
+   value: platform},
+    "osversion": {
+   type: "singleline",
+   value: osversion},
+ "device": {
+   type: "singleline",
+   value: device},
+    "model": {
+   type: "singleline",
+   value: model}
+    
+    
+    
+    
+    
+}
+         
+         );
+
+    
+
+  
+    
+    
+    </script>
+    
+</body>
+</html>
