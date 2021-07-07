@@ -392,7 +392,7 @@
 
   <!-- <h1 style="font-size: 16px;text-align: center;font-family: Roboto; font-weight: bold; padding-top: 40px;padding-bottom: 20px;background-color:#0C1921;color:#b9cad3;margin-top: 0px;margin-bottom: 0px;">Faqs</h1> -->
 
-  <button style="font-family: Roboto!important" class="notification" onclick="openHelpshift()" type="button">
+  <!-- <button style="font-family: Roboto!important" class="notification" onclick="openHelpshift()" type="button"> -->
 
     <span>Inbox</span>
     <span class="badge">0</span>
@@ -403,7 +403,7 @@
   <script>
 
     let help_center_url = "https://ubisoft-mobile.helpshift.com/a/" + hsapp + "/?p=" + hs_faq_platform + "&l=" + language;
-    help_center_url = `https://ubisoft-mobile.helpshift.com/hc/${language}/${hsapp}/?hbhf=1&han=1&hpn=1&p=${hs_faq_platform}`;
+    help_center_url = `https://ubisoft-mobile.helpshift.com/hc/${language}/${hsapp}/?hbhf=0&han=1&hpn=1&p=${hs_faq_platform}`;
 
     //Pass the app, platform and language in from the URL parameters to form the Web Support Portal URL
     document.getElementById("hs-support-frame").src = help_center_url;
