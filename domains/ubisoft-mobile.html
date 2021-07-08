@@ -17,7 +17,9 @@
     <script>
           
           //pass URL patameters into local variables
-          var param = getURLParameters(document.URL);
+          let param = getURLParameters(document.URL);
+          let param_misc = param['misc'];
+
           var country = param['country'];
           let cstsuid = param['cstsuid'];
           var language = param['language'];
@@ -31,9 +33,13 @@
           var progression = unescape(param['progression']);
           var device = unescape(param['device']);
           device = device.replace(/[&\/\\#,+()$~%'â€":*?<>{}]/g,'');
+          let misc = decodeURIComponent(param_misc);
           var model = unescape(param['model']);
           var osversion = unescape(param['osversion']);
 
+          let misc_split_array = `${misc || ''}`.split(';');
+          let misc_split_string = misc_split_array.join('\n');
+          
           let payer = `${param_payer || ''}`.toLowerCase();
           
                   //other variables
@@ -307,24 +313,28 @@
           }
           
           
-          
-          
-          
-          
-          
   //function to get URL parameters
-  function getURLParameters(url) {
+  function getURLParameters(p_url) {
 
-    var result = {};
-    var searchIndex = url.indexOf("?");
-    if (searchIndex == -1 ) return result;
-    var sPageURL = url.substring(searchIndex +1);
-    var sURLVariables = sPageURL.split('&');
-    for (var i = 0; i < sURLVariables.length; i++) {
-      var sParameterName = sURLVariables[i].split('=');
-      result[sParameterName[0]] = sParameterName[1];
+    let url_parameters = {};
+
+    let url = new URL(p_url);
+    let query_string = url.search;
+    
+    // If a query string has been provided
+    if (query_string.length > 1) {
+
+      let search_parameters = new URLSearchParams(query_string);
+
+      let search_parameter_keys = search_parameters.keys();
+
+      for (let current_parameter of search_parameter_keys) {
+
+        url_parameters[current_parameter] = search_parameters.get(current_parameter);
+      }
     }
-    return result;
+
+    return url_parameters;
   }
 
   //function to open Helpshift, from the Contact Us button
@@ -405,7 +415,7 @@
   <script>
 
     let help_center_url = "https://ubisoft-mobile.helpshift.com/a/" + hsapp + "/?p=" + hs_faq_platform + "&l=" + language;
-    help_center_url = `https://ubisoft-mobile.helpshift.com/hc/${language}/${hsapp}/?hbhf=0&han=1&hpn=1&p=${hs_faq_platform}`;
+    help_center_url = `https://ubisoft-mobile.helpshift.com/hc/${language}/${hsapp}/?hbhf=1&han=1&hpn=1&p=${hs_faq_platform}`;
 
     //Pass the app, platform and language in from the URL parameters to form the Web Support Portal URL
     document.getElementById("hs-support-frame").src = help_center_url;
@@ -449,10 +459,10 @@
           break;
     }
 
-  var label = document.getElementsByClassName("notification");
+  // var label = document.getElementsByClassName("notification");
 
-  label[0].children[0].innerText = custom_button_label;
-  label[0].children[1].hidden = true;
+  // label[0].children[0].innerText = custom_button_label;
+  // label[0].children[1].hidden = true;
 
   // console.log(label);
 
@@ -540,11 +550,6 @@
         value: fbid
       },
 
-      "fbid": {
-        type: "singleline",
-        value: fbid
-      },
-
       "bundleid": {
         type: "singleline",
         value: bundleid
@@ -584,10 +589,15 @@
       "model": {
         type: "singleline",
         value: model
+      },
+
+      "misc": {
+        type: "multiline",
+        value: misc_split_string
       }
     });
       
-      </script>
+  </script>
       
   </body>
 
