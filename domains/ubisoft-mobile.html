@@ -404,18 +404,19 @@
 
   <!-- <h1 style="font-size: 16px;text-align: center;font-family: Roboto; font-weight: bold; padding-top: 40px;padding-bottom: 20px;background-color:#0C1921;color:#b9cad3;margin-top: 0px;margin-bottom: 0px;">Faqs</h1> -->
 
-  <!-- <button style="font-family: Roboto!important" class="notification" onclick="openHelpshift()" type="button">
+  <button style="font-family: Roboto!important" class="notification" onclick="openHelpshift()" type="button">
 
     <span>Inbox</span>
     <span class="badge">0</span>
-  </button> -->
+
+  </button>
 
   <iframe id="hs-support-frame" width="100%" height="880px" frameborder="0"></iframe>
       
   <script>
 
     let help_center_url = "https://ubisoft-mobile.helpshift.com/a/" + hsapp + "/?p=" + hs_faq_platform + "&l=" + language;
-    help_center_url = `https://ubisoft-mobile.helpshift.com/hc/${language}/${hsapp}/?hbhf=1&han=1&hpn=1&p=${hs_faq_platform}`;
+    help_center_url = `https://ubisoft-mobile.helpshift.com/hc/${language}/${hsapp}/?hbhf=0&han=1&hpn=1&p=${hs_faq_platform}`;
 
     //Pass the app, platform and language in from the URL parameters to form the Web Support Portal URL
     document.getElementById("hs-support-frame").src = help_center_url;
@@ -459,10 +460,10 @@
           break;
     }
 
-  // var label = document.getElementsByClassName("notification");
+  var label = document.getElementsByClassName("notification");
 
-  // label[0].children[0].innerText = custom_button_label;
-  // label[0].children[1].hidden = true;
+  label[0].children[0].innerText = custom_button_label;
+  label[0].children[1].hidden = true;
 
   // console.log(label);
 
@@ -486,19 +487,23 @@
     }) ();
 
     !function(t,e){if("function"!=typeof window.Helpshift){var n=function(){n.q.push(arguments)};n.q=[],window.Helpshift=n;var i,a=t.getElementsByTagName("script")[0];if(t.getElementById(e))return;i=t.createElement("script"),i.async=!0,i.id=e,i.src="https://webchat.helpshift.com/latest/webChat.js";var o=function(){window.Helpshift("init")};window.attachEvent?i.attachEvent("onload",o):i.addEventListener("load",o,!1),a.parentNode.insertBefore(i,a)}else window.Helpshift("update")}(document,"hs-chat");
-  
+  console.log(`userMessage: ${userMessage}`);
       //Hide Helpshift by default, as we'll use a custom button
     Helpshift("setInitialUserMessage", userMessage)
     Helpshift("close");
     Helpshift("hide");
-      
+    
     //If the widget is opened and then closed (lisening to the event handler)
     var widgetToggleEventHandler = function(data) {
+      console.log('it is here')
       if (data.visible == false) {
         Helpshift("hide");
       }
     }
-
+setTimeout(() => {
+  console.log('this happened')
+  openHelpshift();
+}, 5000);
     //Event handler to listen for web chat widget changes
     Helpshift("addEventListener", "widgetToggle", widgetToggleEventHandler);
 
