@@ -22,7 +22,7 @@
           let cstsuid = param['cstsuid'];
           var language = param['language'];
           var dnaid = unescape(param['dnaID']);
-          var payer = param['payer'].toLowerCase();
+          var param_payer = param['payer'];
           var ingameid = param['ingameID'];
           var fbid = param['fbId'];
           var bundleid = param['bundleId'];
@@ -33,6 +33,8 @@
           device = device.replace(/[&\/\\#,+()$~%'â€":*?<>{}]/g,'');
           var model = unescape(param['model']);
           var osversion = unescape(param['osversion']);
+
+          let payer = `${param_payer || ''}`.toLowerCase();
           
                   //other variables
           var hsappid = "";
@@ -186,8 +188,8 @@
 
             // Is It Love? Nicolae
             case "054fb2866c3ebf05997ff69c80ea9276":
-                hsappid = "ubisoft-mobile_platform_20200901202653950-590f633c7dd3118";
-                hsapp = "is-it-love-james";
+                hsappid = "ubisoft-mobile_platform_20210608080328847-8534835b990d548";
+                hsapp = "34-is-it-love-nicolae";
                 break;
 
             // Is It Love? Peter
@@ -392,13 +394,13 @@
 
   <!-- <h1 style="font-size: 16px;text-align: center;font-family: Roboto; font-weight: bold; padding-top: 40px;padding-bottom: 20px;background-color:#0C1921;color:#b9cad3;margin-top: 0px;margin-bottom: 0px;">Faqs</h1> -->
 
-  <!-- <button style="font-family: Roboto!important" class="notification" onclick="openHelpshift()" type="button"> -->
+  <!-- <button style="font-family: Roboto!important" class="notification" onclick="openHelpshift()" type="button">
 
-    <!-- <span>Inbox</span>
+    <span>Inbox</span>
     <span class="badge">0</span>
-    </button> -->
+  </button> -->
 
-  <iframe id='hs-support-frame' width=100% height=880px frameborder='0'></iframe>
+  <iframe id="hs-support-frame" width="100%" height="880px" frameborder="0"></iframe>
       
   <script>
 
@@ -546,6 +548,12 @@
       "bundleid": {
         type: "singleline",
         value: bundleid
+      },
+
+      // TODO: Add this
+      "game": {
+        type: "dropdown",
+        value: cstsuid
       },
 
       "progression": {
