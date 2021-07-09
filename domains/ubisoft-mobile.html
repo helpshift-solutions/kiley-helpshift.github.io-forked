@@ -23,19 +23,19 @@
           var country = param['country'];
           let cstsuid = param['cstsuid'];
           var language = param['language'];
-          var dnaid = unescape(param['dnaID']);
+          var dnaid = unescape(param['dnaID'] || '');
           var param_payer = param['payer'];
           var ingameid = param['ingameID'];
           var fbid = param['fbId'];
           var bundleid = param['bundleId'];
           var param_platform = param['platform'];
           let platform = `${param_platform || ''}`.toLowerCase();
-          var progression = unescape(param['progression']);
-          var device = unescape(param['device']);
+          var progression = unescape(param['progression'] || '');
+          var device = unescape(param['device'] || '');
           device = device.replace(/[&\/\\#,+()$~%'â€":*?<>{}]/g,'');
           let misc = decodeURIComponent(param_misc);
-          var model = unescape(param['model']);
-          var osversion = unescape(param['osversion']);
+          var model = unescape(param['model'] || '');
+          var osversion = unescape(param['osversion'] || '');
 
           let misc_split_array = `${misc || ''}`.split(';');
           let misc_split_string = misc_split_array.join('\n');
@@ -465,8 +465,6 @@
   label[0].children[0].innerText = custom_button_label;
   label[0].children[1].hidden = true;
 
-  // console.log(label);
-
     //Helpshift Web Chat
     (function () {
       var PLATFORM_ID = hsappid,
@@ -487,8 +485,8 @@
     }) ();
 
     !function(t,e){if("function"!=typeof window.Helpshift){var n=function(){n.q.push(arguments)};n.q=[],window.Helpshift=n;var i,a=t.getElementsByTagName("script")[0];if(t.getElementById(e))return;i=t.createElement("script"),i.async=!0,i.id=e,i.src="https://webchat.helpshift.com/latest/webChat.js";var o=function(){window.Helpshift("init")};window.attachEvent?i.attachEvent("onload",o):i.addEventListener("load",o,!1),a.parentNode.insertBefore(i,a)}else window.Helpshift("update")}(document,"hs-chat");
-  console.log(`userMessage: ${userMessage}`);
-      //Hide Helpshift by default, as we'll use a custom button
+    
+    //Hide Helpshift by default, as we'll use a custom button
     Helpshift("setInitialUserMessage", userMessage)
     // Helpshift("close");
     // Helpshift("hide");
@@ -500,10 +498,7 @@
         // Helpshift("hide");
       }
     }
-// setTimeout(() => {
-//   console.log('this happened')
-//   openHelpshift();
-// }, 5000);
+
     //Event handler to listen for web chat widget changes
     Helpshift("addEventListener", "widgetToggle", widgetToggleEventHandler);
 
