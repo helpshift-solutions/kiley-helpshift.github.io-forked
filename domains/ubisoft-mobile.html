@@ -490,7 +490,7 @@
   console.log(`userMessage: ${userMessage}`);
       //Hide Helpshift by default, as we'll use a custom button
     Helpshift("setInitialUserMessage", userMessage)
-    Helpshift("close");
+    // Helpshift("close");
     // Helpshift("hide");
     
     //If the widget is opened and then closed (lisening to the event handler)
@@ -500,10 +500,10 @@
         // Helpshift("hide");
       }
     }
-setTimeout(() => {
-  console.log('this happened')
-  openHelpshift();
-}, 5000);
+// setTimeout(() => {
+//   console.log('this happened')
+//   openHelpshift();
+// }, 5000);
     //Event handler to listen for web chat widget changes
     Helpshift("addEventListener", "widgetToggle", widgetToggleEventHandler);
 
