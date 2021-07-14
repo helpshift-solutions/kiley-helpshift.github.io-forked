@@ -59,7 +59,8 @@
 
           var supported_languages = ["en","fr","de","pt","es","it"];
 
-          if (supported_languages.includes(language) == false) {
+          // If the specified language is not found in the list of supported languages
+          if (supported_languages.indexOf(language) === -1) {
             language = 'en';
           }
           
