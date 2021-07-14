@@ -22,7 +22,7 @@
 
           var country = param['country'];
           let cstsuid = param['cstsuid'];
-          var param_language = param['language'];
+          var param_language = param['lang'] || param['language'];
           var language = `${language || ''}`.toLowerCase();
           var dnaid = unescape(param['dnaID'] || '');
           var param_payer = param['payer'];
