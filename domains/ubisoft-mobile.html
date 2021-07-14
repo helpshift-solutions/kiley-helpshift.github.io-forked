@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+z<!DOCTYPE html>
 
 <html>
 
@@ -23,9 +23,9 @@
           var country = param['country'];
           let cstsuid = param['cstsuid'];
           var language = param['language'];
-          var dnaid = unescape(param['dnaID'] || '');
+          var dnaid = unescape(param['dnaid'] || '');
           var param_payer = param['payer'];
-          var ingameid = param['ingameID'];
+          var ingameid = param['igpid'] || param['ingameID'];
           var fbid = param['fbId'];
           var bundleid = param['bundleId'];
           var param_platform = param['platform'];
@@ -580,7 +580,7 @@
       },
 
       "dnaid": {
-        type: "ingameid",
+        type: "singleline",
         value: dnaid
       },
 
