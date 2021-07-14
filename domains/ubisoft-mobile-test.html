@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <!-- <link rel="icon" href="https://d2fs58k4ez69fv.cloudfront.net/88db157d41d3d3263d8de9701eda6df5a268b2911e5a60f1dd25b0b6c509cba5" /> -->
+
+    <meta charset="UTF-8" />
+
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> -->
+
+    <style>
+      /* @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); */
+    </style>
+
+    <script>
+          
+          //pass URL patameters into local variables
+          let param = getURLParameters(document.URL);
+          let param_misc = param['misc'];
+
+          var country = param['country'];
+          let cstsuid = param['cstsuid'];
+          var param_language = param['language'];
+          var language = `${language || ''}`.toLowerCase();
+          var dnaid = unescape(param['dnaID'] || '');
+          var param_payer = param['payer'];
+          var ingameid = param['igpid'] || param['ingameID'];
+          var fbid = param['fbId'];
+          var bundleid = param['bundleId'];
+          var param_platform = param['platform'];
+          let platform = `${param_platform || ''}`.toLowerCase();
+          var progression = unescape(param['progression'] || '');
+          var device = unescape(param['device'] || '');
+          device = device.replace(/[&\/\\#,+()$~%'â€":*?<>{}]/g,'');
+          let misc = decodeURIComponent(param_misc);
+          var model = unescape(param['model'] || '');
+          var osversion = unescape(param['osversion'] || '');
+
+          let misc_split_array = `${misc || ''}`.split(';');
+          let misc_split_string = misc_split_array.join('\n');
+          
+          let payer = `${param_payer || ''}`.toLowerCase();
+          
+          //other variables
+          let hs_app_full_name = '';
+          var hsappid = '';
+          var hsapp = '';
+          var custom_button_label = '';
+          var userMessage = "I need to speak with you";
+          var unread = 0;
+          var hs_faq_platform = ''
+          
+          //default lang to EN is lang is not supplied or not supported (important for Contact Us button)
+          if (language == null) {
+            language = 'en';
+          }
+
+          var supported_languages = ["en","fr","de","pt","es","it"];
+
+          if (supported_languages.includes(language) == false) {
+            language = 'en';
+          }
+          
+          //handle platform
+          switch (platform){
+              case "android":
+                  hs_faq_platform="android"
+                  break;
+              case "iphoneplayer":
+                  hs_faq_platform="ios"
+                  break;
+              default:
+                  hs_faq_platform="ios"
+                  break;
+          }
+          
+          //other variables
+          var hsappid = "";
+          var hsapp = "";
+          var custom_button_label = "";
+          var userMessage = "I need to speak with you";
+          var unread = 0;
+          
+          // Fill game-specific variables
+          switch (cstsuid) {
+
+            // Assassin's Creed Identity
+            case "89d6a47d415383309f9d0c34dc2e024b":
+                hsappid = "ubisoft-mobile_platform_20210607171045791-f86bc5a84694ae9";
+                hsapp = "20-assassin-s-creed-identity";
+                hs_app_full_name = "Assassin's Creed Identity";
+                break;
+
+            // Assassin's Creed Rebellion
+            case "f155dff9e3ecfc357f7a5f969bbd930c":
+                hsappid = "ubisoft-mobile_platform_20210608073925824-3f0f09f71d56c64";
+                hsapp = "24-assassin-s-creed-rebellion";
+                hs_app_full_name = "Assassin's Creed Rebellion";
+                break;
+
+            // Clash of Beasts
+            case "608c903cb02a6707fe399ec2e222e22b":
+              hsappid = "ubisoft-mobile_platform_20210608074803975-0f0482ff56515f5";
+              hsapp = "25-clash-of-beasts";
+              hs_app_full_name = "Clash of Beasts";
+              break;
+            
+            // Growtopia
+            case "8121bae552117f53d5fbc85b8191c153":
+              hsappid = "ubisoft-mobile_platform_20210608074937656-1fd0432f156febe";
+              hsapp = "26-growtopia";
+              hs_app_full_name = "Growtopia";
+              break;
+
+            // Horse Haven: World Adventures
+            case "29924a11fe3266703df64743d24e0dfb":
+              hsappid = "ubisoft-mobile_platform_20210608075109891-aa98993ea3d00cc";
+              hsapp = "27-horse-haven-world-adventures";
+              hs_app_full_name = "Horse Haven: World Adventures";
+              break;
+
+            // Hungry Dragon
+            case "92192eadf22f6aafe6fadd926945ae60":
+                hsappid = "ubisoft-mobile_platform_20210608075217996-f52bd706cfe9a21";
+                hsapp = "28-hungry-dragon";
+                hs_app_full_name = "Hungry Dragon";
+                break;
+
+            // Hungry Shark Evolution
+            case "98e5e21a2c21caac8731dd2fafff7cfd":
+                hsappid = "ubisoft-mobile_platform_20201214185434499-55030d9fb1f75f0";
+                hsapp = "8-hungry-shark-evolution";
+                hs_app_full_name = "Hungry Shark Evolution";
+                break;
+
+            // Hungry Shark World
+            case "52ebd607da114caecba75b059f60a048":
+              hsappid = "ubisoft-mobile_platform_20210608075342764-86c2e25d93df66b";
+              hsapp = "29-hungry-shark-world";
+              hs_app_full_name = "Hungry Shark World";
+              break;
+
+            // Is It Love? Adam
+            case "5914d0b0765ddaa535b970734d782513":
+              hsappid = "ubisoft-mobile_platform_20210608075557664-acd9d82ec72071f";
+              hsapp = "30-is-it-love-adam";
+              hs_app_full_name = "Is It Love? Adam";
+              break;
+
+            // Is it Love? Blue Swan Hospital
+            case "4b3e657a0eb978ef8e54cc7bdb797d8c":
+              hsappid = "ubisoft-mobile_platform_20210608083451483-224a47b41198767";
+              hsapp = "37-is-it-love-blue-swan-hospital";
+              hs_app_full_name = "Is it Love? Blue Swan Hospital";
+              break;
+
+            // Is It Love? Colin
+            case "3c9d095fade416cc03620c091e89d934":
+              hsappid = "ubisoft-mobile_platform_20210608075659381-44085ed4ba19645";
+              hsapp = "31-is-it-love-colin";
+              hs_app_full_name = "Is It Love? Colin";
+              break;
+
+            // Is it Love? Daryl
+            case "09652083c662e18aec88d9cbbd11061c":
+              hsappid = "ubisoft-mobile_platform_20210608083611959-08c7b838d5d3f00";
+              hsapp = "38-is-it-love-daryl";
+              hs_app_full_name = "Is it Love? Daryl";
+              break;
+
+            // Is it Love? Drogo
+            case "0ecb5b20fc284f6cfd1370dfaef11ee6":
+                hsappid = "ubisoft-mobile_platform_20200826084403003-d9262b676965e0d";
+                hsapp = "4-is-it-love-drogo-1623139831";
+                hs_app_full_name = "Is it Love? Drogo";
+                break;
+
+            // Is it Love? Fallen Road
+            case "c45158ee7d4c0cd9067a94d380b60615":
+                hsappid = "ubisoft-mobile_platform_20210608083733196-aa00dacd0eb8d8c";
+                hsapp = "39-is-it-love-fallen-road";
+                hs_app_full_name = "Is it Love? Fallen Road";
+                break;
+
+            // Is It Love? Gabriel
+            case "44a546ba15200cf9b521bffa2579d09f":
+              hsappid = "ubisoft-mobile_platform_20210608075935955-9e393d3d91bee8c";
+              hsapp = "32-is-it-love-gabriel";
+              hs_app_full_name = "Is It Love? Gabriel";
+              break;
+
+            // Is It Love? Jake
+            case "230ee4759717e1e00a2c97faaf736d86":
+              hsappid = "ubisoft-mobile_platform_20200901202843571-8a81751f33d153e";
+              hsapp = "7-is-it-love-jake";
+              hs_app_full_name = "Is It Love? Jake";
+              break;
+
+            // Is It Love? James
+            case "a746118b16b81407b94fbee7ad636170":
+              hsappid = "ubisoft-mobile_platform_20200901202653950-590f633c7dd3118";
+              hsapp = "6-is-it-love-james";
+              hs_app_full_name = "Is It Love? James";
+              break;
+
+            // Is It Love? Matt
+            case "d5a47af85ff7a457156841e531ac57ee":
+                hsappid = "ubisoft-mobile_platform_20210608080049935-cc6b3efca68d724";
+                hsapp = "33-is-it-love-matt";
+                hs_app_full_name = "Is It Love? Matt";
+                break;
+
+            // Is It Love? Nicolae
+            case "054fb2866c3ebf05997ff69c80ea9276":
+                hsappid = "ubisoft-mobile_platform_20210608080328847-8534835b990d548";
+                hsapp = "34-is-it-love-nicolae";
+                hs_app_full_name = "Is It Love? Nicolae";
+                break;
+
+            // Is It Love? Peter
+            case "7b83830c61fa8335e34fb173b0e0f94b":
+              hsappid = "ubisoft-mobile_platform_20210608080459020-9740d2183d8d031";
+              hsapp = "35-is-it-love-peter";
+              hs_app_full_name = "Is It Love? Peter";
+              break;
+
+            // Is It Love? Ryan
+            case "2db752f47ba2ee0b7e433060a4a1360c":
+              hsappid = "ubisoft-mobile_platform_20200901202520185-517577612635555";
+              hsapp = "5-is-it-love-ryan";
+              hs_app_full_name = "Is It Love? Ryan";
+              break;
+
+            // Is it Love? Sebastian
+            case "13bcbb78a6ae9c5cd552c32245cef393":
+              hsappid = "ubisoft-mobile_platform_20210608083844911-fcf3652058df67d";
+              hsapp = "40-is-it-love-sebastian";
+              hs_app_full_name = "Is it Love? Sebastian";
+              break;
+
+            // Is It Love? Stories
+            case "2ee7a3f1f098f5d667f2d3d77366ded9":
+              hsappid = "ubisoft-mobile_platform_20210608080814260-0fb0ebbd63289b8";
+              hsapp = "36-is-it-love-stories";
+              hs_app_full_name = "Is It Love? Stories";
+              break;
+
+            // Just Dance Now
+            case "4d73aa0f19eec235085c03eedc622ed5":
+              hsappid = "ubisoft-mobile_platform_20201218100416773-6b8f7b926630bc4";
+              hsapp = "10-just-dance-now";
+              hs_app_full_name = "Just Dance Now";
+              break;
+
+            // Might & Magic: Chess Royale
+            case "cf9f3d72addb4e46ba055465eeca282c":
+                hsappid = "ubisoft-mobile_platform_20210607170748045-c9eadd7f33a28cf";
+                hsapp = "18-might-magic-chess-royale";
+                hs_app_full_name = "Might & Magic: Chess Royale";
+                break;
+
+            // Might & Magic: Elemental Guardians
+            case "cd6a617edf97d768067ac38e295f651c":
+                hsappid = "ubisoft-mobile_platform_20210607170637366-c31c73f2a99aad8";
+                hsapp = "17-might-magic-elemental-guardians";
+                hs_app_full_name = "Might & Magic: Elemental Guardians";
+                break;
+
+            // Might & Magic: Era of Chaos
+            case "e4d754a93e2318653a0d2f2b3912a455":
+              hsappid = "ubisoft-mobile_platform_20201215144424703-1b91947e66f66e7";
+              hsapp = "9-might-magic-era-of-chaos";
+              hs_app_full_name = "Might & Magic: Era of Chaos";
+              break;
+
+            // Mighty Quest
+            case "8dbdcb8d940c12488161e46f70d25dd2":
+              hsappid = "ubisoft-mobile_platform_20210607170427808-bc2f2b74fe74e94";
+              hsapp = "16-mighty-quest";
+              hs_app_full_name = "Mighty Quest";
+              break;
+
+            // MyCrush
+            case "06fbbd5792606de607a9c35e014b8ce5":
+              hsappid = "ubisoft-mobile_platform_20210709012405555-1c1bdd14333616a";
+              hsapp = "14-mycrush";
+              hs_app_full_name = "MyCrush";
+              break;
+
+            // Rayman Adventures
+            case "e5ca65905e8a56683a9d0a46b7ab403c":
+                hsappid = "ubisoft-mobile_platform_20210607170853276-64e4ae39036f30d";
+                hsapp = "19-rayman-adventures";
+                hs_app_full_name = "Rayman Adventures";
+                break;
+
+            // Rayman Fiesta Run
+            case "6c890a5d585ff904ac860afdcef125a9":
+                hsappid = "ubisoft-mobile_platform_20210607171252025-6ec50b1e972d467";
+                hsapp = "22-rayman-fiesta-run";
+                hs_app_full_name = "Rayman Fiesta Run";
+                break;
+
+            // Rayman Jungle Run
+            case "7affc13378c8853d8783f5e182ec3333":
+              hsappid = "ubisoft-mobile_platform_20210607171143288-ff2c52880bc2fe6";
+              hsapp = "21-rayman-jungle-run";
+              hs_app_full_name = "Rayman Jungle Run";
+              break;
+
+            // Rayman Mini
+            case "ba55aa1a26bc0a7e53bbf5ecb656b9ef":
+              hsappid = "ubisoft-mobile_platform_20210607170241791-d402cec4263d6b8";
+              hsapp = "15-rayman-mini";
+              hs_app_full_name = "Rayman Mini";
+              break;
+
+            // South Park Phone Destroyer
+            case "4ea5f2b3a42ee4fa6e2c4d8f3d4fea58":
+              hsappid = "ubisoft-mobile_platform_20210607165406567-68c1b524ab2b545";
+              hsapp = "13-south-park-phone-destroyer";
+              hs_app_full_name = "South Park Phone Destroyer";
+              break;
+
+            // Tom Clancy's Elite Squad
+            case "7c01f77d4ec8c373f79e340d6e57d981":
+              hsappid = "ubisoft-mobile_platform_20210607165235631-7c11ef90eb2f083";
+              hsapp = "12-tom-clancy-s-elite-squad";
+              hs_app_full_name = "Tom Clancy's Elite Squad";
+              break;
+
+            // Trials Frontier
+            case "8a0861fa2ab3ec4c226d3c90a9624edd":
+              hsappid = "ubisoft-mobile_platform_20210607165106098-a4090a938621179";
+              hsapp = "11-trials-frontier";
+              hs_app_full_name = "Trials Frontier";
+              break;
+
+            // Valiant Hearts: The Great War
+            case "f978fbe9bdfff097d0aa863d57b93891":
+                hsappid = "ubisoft-mobile_platform_20210607171353813-94a0eaed46b4e98";
+                hsapp = "23-valiant-hearts-the-great-war";
+                hs_app_full_name = "Valiant Hearts: The Great War";
+                break;
+
+            // City of Love: Paris
+            case "c8802ade421dda67b31b9b6c819b3bb3":
+                hsappid = "ubisoft-mobile_platform_20210709154455244-4adbac7280815fd";
+                hsapp = "44-city-of-love-paris";
+                hs_app_full_name = "City of Love: Paris";
+                break;
+
+            default:
+                // Redirect the browser to a default page somewhere
+                // TODO: Tristan agrees --> Default back to somewhere common
+                hs_app_full_name = "Ubisoft";
+                break;
+          }
+  
+  document.title = hs_app_full_name;
+          
+          
+  //function to get URL parameters
+  function getURLParameters(p_url) {
+
+    let url_parameters = {};
+
+    let url = new URL(p_url);
+    let query_string = url.search;
+    
+    // If a query string has been provided
+    if (query_string.length > 1) {
+
+      let search_parameters = new URLSearchParams(query_string);
+
+      let search_parameter_keys = search_parameters.keys();
+
+      for (let current_parameter of search_parameter_keys) {
+
+        url_parameters[current_parameter] = search_parameters.get(current_parameter);
+      }
+    }
+
+    return url_parameters;
+  }
+
+  //function to open Helpshift, from the Contact Us button
+  function openHelpshift() {
+
+    Helpshift("setInitialUserMessage", userMessage);
+    Helpshift("show");
+    Helpshift("open");  
+  }
+
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+      
+      
+    <style>
+
+      .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+
+      .notification {
+        color: #ffffff;
+        font-size: 15px;
+        background: #c9576d;
+        text-decoration: none;
+        padding: 5px;
+        position: fixed;
+        /* display: inline-block; */
+        display:none;
+        height: 45px;
+        width:130px;
+        border-radius: 24px;
+        font-family: Roboto !important;
+        font-weight: bold;
+        border: none;
+        left: 50%;
+        bottom: 1%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+
+      .notification .badge {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        font-family: Roboto;
+        padding: 5px 10px;
+        border-radius: 50%;
+        background-color: red;
+        color: white;
+      }
+
+    </style>
+
+    <!-- <title>Is It Love?</title> -->
+    <title></title>
+    
+  </head>
+
+<body style="margin-right:0;margin-left:0">
+<!-- <body style="margin-top: -20px;margin-right:0;margin-left:0"> -->
+
+  <!-- <h1 style="font-size: 16px;text-align: center;font-family: Roboto; font-weight: bold; padding-top: 40px;padding-bottom: 20px;background-color:#0C1921;color:#b9cad3;margin-top: 0px;margin-bottom: 0px;">Faqs</h1> -->
+
+  <button style="font-family: Roboto!important" class="notification" onclick="openHelpshift()" type="button">
+
+    <span>Inbox</span>
+    <span class="badge">0</span>
+
+  </button>
+
+  <iframe id="hs-support-frame" width="100%" height="880px" frameborder="0"></iframe>
+      
+  <script>
+
+    let help_center_url = "https://ubisoft-mobile.helpshift.com/a/" + hsapp + "/?p=" + hs_faq_platform + "&l=" + language;
+    help_center_url = `https://ubisoft-mobile.helpshift.com/hc/${language}/${hsapp}/?hbhf=1&han=1&hpn=1&p=${hs_faq_platform}`;
+
+    //Pass the app, platform and language in from the URL parameters to form the Web Support Portal URL
+    document.getElementById("hs-support-frame").src = help_center_url;
+      
+    //Handle label of custom Contact Us buuton   
+    switch (language) {
+
+      case "fr":
+          custom_button_label = "Nous contacter";
+          userMessage = "J'ai besoin de vous contacter"
+          break;
+
+      case "de":
+          custom_button_label = "kontaktieren Sie uns";
+          userMessage = "Ich muss dich kontaktieren"
+          break;
+
+      case "es":
+          custom_button_label = "Contáctanos";
+          userMessage = "Necesito contactarte"
+          break;
+
+      case "it":
+          custom_button_label = "Contattaci";
+          userMessage = "Ho bisogno di contattarti"
+          break;
+
+      case "pt":
+          custom_button_label = "Contate-Nos";
+          userMessage = "Eu preciso entrar em contato com você"
+          break;
+
+      case "ru":
+          custom_button_label = "Связаться";
+          userMessage = "Мне нужно с тобой связаться"
+          break;
+
+      case "en":
+          custom_button_label = "Contact Us";
+          userMessage = "I need to contact you"
+          break;
+    }
+
+  var label = document.getElementsByClassName("notification");
+
+  label[0].children[0].innerText = custom_button_label;
+  label[0].children[1].hidden = true;
+
+    //Helpshift Web Chat
+    (function () {
+      var PLATFORM_ID = hsappid,
+      DOMAIN = "ubisoft-mobile",
+      LANGUAGE = LANGUAGE;
+
+      console.log(`Language used is: ${LANGUAGE}`);
+      window.helpshiftConfig = {
+        platformId: PLATFORM_ID,
+        domain: DOMAIN,
+        language: LANGUAGE,
+        uiConfig: {
+          global: {
+            color: "#153141", 
+            fontFamily: "Roboto, Helvetica, sans-serif"
+          }
+        }
+      };
+    }) ();
+
+    !function(t,e){if("function"!=typeof window.Helpshift){var n=function(){n.q.push(arguments)};n.q=[],window.Helpshift=n;var i,a=t.getElementsByTagName("script")[0];if(t.getElementById(e))return;i=t.createElement("script"),i.async=!0,i.id=e,i.src="https://webchat.helpshift.com/latest/webChat.js";var o=function(){window.Helpshift("init")};window.attachEvent?i.attachEvent("onload",o):i.addEventListener("load",o,!1),a.parentNode.insertBefore(i,a)}else window.Helpshift("update")}(document,"hs-chat");
+    
+    //Hide Helpshift by default, as we'll use a custom button
+    Helpshift("setInitialUserMessage", userMessage)
+    // Helpshift("close");
+    // Helpshift("hide");
+    
+    //If the widget is opened and then closed (lisening to the event handler)
+    var widgetToggleEventHandler = function(data) {
+      
+      if (data.visible == false) {
+        // Helpshift("hide");
+      }
+    }
+
+    //Event handler to listen for web chat widget changes
+    Helpshift("addEventListener", "widgetToggle", widgetToggleEventHandler);
+
+    //Event for unread messagages (update custom button badge)
+    var newUnreadMessagesEventHandler = function(data) {
+
+      if (data.unreadCount > 0) {
+        label[0].children[1].hidden = false;
+        label[0].children[1].innerText = data.unreadCount;
+      }
+
+      else {
+        label[0].children[1].hidden = true;
+      }
+    }
+
+    Helpshift("addEventListener", "newUnreadMessages", newUnreadMessagesEventHandler);
+
+    //Fill the custom issue fields with the URL parameters (via the local variables)
+    Helpshift("setCustomIssueFields", {
+
+      "country": {
+        type: "singleline",
+        value: country
+      },
+
+      "user_language": {
+        type: "dropdown",
+        value: language
+      },
+
+      "dnaid": {
+        type: "singleline",
+        value: dnaid
+      },
+
+      "payer": {
+        type: "checkbox",
+        value: payer
+      },
+
+      "ingameid": {
+        type: "singleline",
+        value: ingameid
+      },
+
+      "fbid": {
+        type: "singleline",
+        value: fbid
+      },
+
+      "bundleid": {
+        type: "singleline",
+        value: bundleid
+      },
+
+      "game": {
+        type: "dropdown",
+        value: hs_app_full_name
+      },
+
+      "progression": {
+        type: "singleline",
+        value: progression
+      },
+
+      "platform": {
+        type: "dropdown",
+        value: platform
+      },
+
+      "platform": {
+        type: "dropdown",
+        value: platform
+      },
+
+      "osversion": {
+        type: "singleline",
+        value: osversion
+      },
+
+      "device": {
+        type: "singleline",
+        value: device
+      },
+
+      "model": {
+        type: "singleline",
+        value: model
+      },
+
+      "misc": {
+        type: "multiline",
+        value: misc_split_string
+      }
+    });
+      
+  </script>
+      
+  </body>
+
+</html>
