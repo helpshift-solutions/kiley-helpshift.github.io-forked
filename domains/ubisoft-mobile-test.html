@@ -23,7 +23,7 @@
           var country = param['country'];
           let cstsuid = param['cstsuid'];
           var param_language = param['language'] || param['lang'];
-          var language = `${language || ''}`.toLowerCase();
+          var language = `${param_language || ''}`.toLowerCase();
           var dnaid = unescape(param['dnaID'] || '');
           var param_payer = param['payer'];
           var ingameid = param['igpid'] || param['ingameID'];
