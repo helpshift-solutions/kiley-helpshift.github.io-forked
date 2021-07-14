@@ -63,7 +63,7 @@
           if (supported_languages.indexOf(language) === -1) {
             language = 'en';
           }
-          console.log(`language: ${language}`);
+          
           //handle platform
           switch (platform){
               case "android":
@@ -521,8 +521,7 @@
       var PLATFORM_ID = hsappid,
       DOMAIN = "ubisoft-mobile",
       LANGUAGE = language;
-
-      console.log(`Language used is: ${LANGUAGE}`);
+      
       window.helpshiftConfig = {
         platformId: PLATFORM_ID,
         domain: DOMAIN,
