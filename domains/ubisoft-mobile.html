@@ -22,8 +22,8 @@
 
           var country = param['country'];
           let cstsuid = param['cstsuid'];
-          var param_language = param['language'];
-          var language = `${language || ''}`.toLowerCase();
+          var param_language = param['language'] || param['lang'];
+          var language = `${param_language || ''}`.toLowerCase();
           var dnaid = unescape(param['dnaID'] || '');
           var param_payer = param['payer'];
           var ingameid = param['igpid'] || param['ingameID'];
@@ -59,7 +59,8 @@
 
           var supported_languages = ["en","fr","de","pt","es","it"];
 
-          if (supported_languages.includes(language) == false) {
+          // If the specified language is not found in the list of supported languages
+          if (supported_languages.indexOf(language) === -1) {
             language = 'en';
           }
           
@@ -519,8 +520,8 @@
     (function () {
       var PLATFORM_ID = hsappid,
       DOMAIN = "ubisoft-mobile",
-      LANGUAGE = LANGUAGE;
-
+      LANGUAGE = language;
+      
       window.helpshiftConfig = {
         platformId: PLATFORM_ID,
         domain: DOMAIN,
