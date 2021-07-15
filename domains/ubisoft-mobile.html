@@ -57,7 +57,32 @@
             language = 'en';
           }
 
-          var supported_languages = ["en","fr","de","pt","es","it"];
+          var supported_languages = [
+            "ar",
+            "cs",
+            "da",
+            "de",
+            "en",
+            "es",
+            "fi",
+            "fr",
+            "hu",
+            "id",
+            "it",
+            "ja",
+            "ko",
+            "nl",
+            "no",
+            "pl",
+            "pt",
+            "ru",
+            "sv",
+            "th",
+            "tr",
+            "vi",
+            "zh-hant",
+            "zh"
+          ];
 
           // If the specified language is not found in the list of supported languages
           if (supported_languages.indexOf(language) === -1) {
@@ -472,41 +497,38 @@
     //Pass the app, platform and language in from the URL parameters to form the Web Support Portal URL
     document.getElementById("hs-support-frame").src = help_center_url;
       
-    //Handle label of custom Contact Us buuton   
+    // Handle custom messaging or labels based on language  
     switch (language) {
 
       case "fr":
-          custom_button_label = "Nous contacter";
           userMessage = "J'ai besoin de vous contacter"
           break;
 
       case "de":
-          custom_button_label = "kontaktieren Sie uns";
           userMessage = "Ich muss dich kontaktieren"
           break;
 
       case "es":
-          custom_button_label = "Contáctanos";
           userMessage = "Necesito contactarte"
           break;
 
       case "it":
-          custom_button_label = "Contattaci";
           userMessage = "Ho bisogno di contattarti"
           break;
 
       case "pt":
-          custom_button_label = "Contate-Nos";
           userMessage = "Eu preciso entrar em contato com você"
           break;
 
       case "ru":
-          custom_button_label = "Связаться";
           userMessage = "Мне нужно с тобой связаться"
           break;
 
       case "en":
-          custom_button_label = "Contact Us";
+          userMessage = "I need to contact you"
+          break;
+      
+      default:
           userMessage = "I need to contact you"
           break;
     }
@@ -521,7 +543,7 @@
       var PLATFORM_ID = hsappid,
       DOMAIN = "ubisoft-mobile",
       LANGUAGE = language;
-      
+
       window.helpshiftConfig = {
         platformId: PLATFORM_ID,
         domain: DOMAIN,
