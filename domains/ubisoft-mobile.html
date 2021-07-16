@@ -16,14 +16,14 @@
 
     <script>
           
-          //pass URL patameters into local variables
+          // Pass URL patameters into local variables
           let param = getURLParameters(document.URL);
           let param_misc = param['misc'];
 
           var country = param['country'];
           let cstsuid = param['cstsuid'];
           var param_language = param['language'] || param['lang'];
-          var language = `${param_language || ''}`.toLowerCase();
+          var url_language = `${param_language || ''}`.toLowerCase();
           var dnaid = unescape(param['dnaID'] || '');
           var param_payer = param['payer'];
           var ingameid = param['igpid'] || param['ingameID'];
@@ -53,9 +53,44 @@
           var hs_faq_platform = ''
           
           //default lang to EN is lang is not supplied or not supported (important for Contact Us button)
-          if (language == null) {
-            language = 'en';
+          if ((typeof url_language === 'undefined') || (url_language === null)) {
+            url_language = 'en';
           }
+          
+          let url_language_pairs = {
+            "ar-ar": "ar",
+            "da-dk": "da",
+            "de-de": "de",
+            "en-au": "en",
+            "en-gb": "en",
+            "en-ca": "en",
+            "en-us": "en",
+            "en-ww": "en",
+            "es-es": "es",
+            "es-mx": "es",
+            "fi-fi": "fi",
+            "fr-fr": "fr",
+            "fr-be": "fr",
+            "fr-ch": "fr",
+            "fr-ca": "fr",
+            "hu-hu": "hu",
+            "id-id": "id",
+            "it-it": "it",
+            "ja-jp": "ja",
+            "ko-kr": "ko",
+            "nl-nl": "nl",
+            "no-no": "no",
+            "pl-pl": "pl",
+            "pt-br": "pt",
+            "pt-pt": "pt",
+            "ru-ru": "ru",
+            "sv-se": "sv",
+            "th-th": "th",
+            "vi-vn": "vi",
+            "zh-cn": "zh",
+            "zh-hk": "zh-hant",
+            "zh-tw": "zh-hant",
+          };
 
           var supported_languages = [
             "ar",
@@ -83,6 +118,8 @@
             "zh-hant",
             "zh"
           ];
+
+          let language = url_language_pairs[url_language] || url_language; // Convert the URL language to one of the standardized languages, if possible
 
           // If the specified language is not found in the list of supported languages
           if (supported_languages.indexOf(language) === -1) {
@@ -500,37 +537,105 @@
     // Handle custom messaging or labels based on language  
     switch (language) {
 
-      case "fr":
-          userMessage = "J'ai besoin de vous contacter"
-          break;
-
+      case "ar":
+        userMessage = "أنا بحاجة للاتصال بك";
+        break;
+      
+      case "cs":
+        userMessage = "Musím vás kontaktovat";
+        break;
+      
+      case "da":
+        userMessage = "Jeg skal kontakte dig";
+        break;
+      
       case "de":
-          userMessage = "Ich muss dich kontaktieren"
-          break;
-
-      case "es":
-          userMessage = "Necesito contactarte"
-          break;
-
-      case "it":
-          userMessage = "Ho bisogno di contattarti"
-          break;
-
-      case "pt":
-          userMessage = "Eu preciso entrar em contato com você"
-          break;
-
-      case "ru":
-          userMessage = "Мне нужно с тобой связаться"
-          break;
+        userMessage = "Ich muss dich kontaktieren";
+        break;
 
       case "en":
-          userMessage = "I need to contact you"
-          break;
+        userMessage = "I need to contact you";
+        break;
+
+      case "es":
+        userMessage = "Necesito contactarte";
+        break;
+      
+      case "fi":
+        userMessage = "Minun täytyy ottaa sinuun yhteyttä";
+        break;
+
+      case "fr":
+        userMessage = "J'ai besoin de vous contacter";
+        break;
+      
+      case "hu":
+        userMessage = "Kapcsolatba kell lépnem veled";
+        break;
+      
+      case "id":
+        userMessage = "Saya perlu menghubungi Anda";
+        break;
+
+      case "it":
+        userMessage = "Ho bisogno di contattarti";
+        break;
+      
+      case "ja":
+        userMessage = "私はあなたに連絡する必要があります";
+        break;
+      
+      case "ko":
+        userMessage = "나는 당신에게 연락해야합니다";
+        break;
+
+      case "nl":
+        userMessage = "Ik moet contact met je opnemen";
+        break;
+      
+      case "no":
+        userMessage = "Jeg må kontakte deg";
+        break;
+      
+      case "pl":
+        userMessage = "muszę się z tobą skontaktować";
+        break;
+
+      case "pt":
+        userMessage = "Eu preciso entrar em contato com você";
+        break;
+
+      case "ru":
+        userMessage = "Мне нужно с тобой связаться";
+        break;
+      
+      case "sv":
+        userMessage = "Jag måste kontakta dig";
+        break;
+      
+      case "th":
+        userMessage = "ฉันต้องติดต่อคุณ";
+        break;
+      
+      case "tr":
+        userMessage = "Sizinle iletişime geçmem lazım";
+        break;
+      
+      case "vi":
+        userMessage = "Tôi cần liên hệ với bạn";
+        break;
+      
+      case "zh":
+        userMessage = "我需要联系你";
+        break;
+      
+      case "zh-hant":
+        userMessage = "我需要聯繫你";
+        break;
       
       default:
-          userMessage = "I need to contact you"
-          break;
+        userMessage = "I need to contact you";
+        break;
     }
 
   var label = document.getElementsByClassName("notification");
@@ -567,7 +672,7 @@
     //If the widget is opened and then closed (lisening to the event handler)
     var widgetToggleEventHandler = function(data) {
       
-      if (data.visible == false) {
+      if (data.visible === false) {
         // Helpshift("hide");
       }
     }
