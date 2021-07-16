@@ -23,7 +23,7 @@
           var country = param['country'];
           let cstsuid = param['cstsuid'];
           var param_language = param['language'] || param['lang'];
-          var language = `${param_language || ''}`.toLowerCase();
+          var url_language = `${param_language || ''}`.toLowerCase();
           var dnaid = unescape(param['dnaID'] || '');
           var param_payer = param['payer'];
           var ingameid = param['igpid'] || param['ingameID'];
@@ -53,11 +53,71 @@
           var hs_faq_platform = ''
           
           //default lang to EN is lang is not supplied or not supported (important for Contact Us button)
-          if (language == null) {
-            language = 'en';
+          if ((typeof url_language === 'undefined') || (url_language === null)) {
+            url_language = 'en';
           }
 
-          var supported_languages = ["en","fr","de","pt","es","it"];
+          let url_language_pairs = {
+            "ar-AR": "ar",
+            "da-DK": "da",
+            "de-DE": "de",
+            "en-AU": "en",
+            "en-GB": "en",
+            "en-CA": "en",
+            "en-US": "en",
+            "en-WW": "en",
+            "es-ES": "es",
+            "es-MX": "es",
+            "fi-FI": "fi",
+            "fr-FR": "fr",
+            "fr-BE": "fr",
+            "fr-CH": "fr",
+            "fr-CA": "fr",
+            "id-ID": "id",
+            "it-IT": "it",
+            "ja-JP": "ja",
+            "nl-NL": "nl",
+            "no-NO": "no",
+            "pl-PL": "pl",
+            "pt-BR": "pt",
+            "pt-PT": "pt",
+            "ru-RU": "ru",
+            "sv-SE": "sv",
+            "vi-VN": "vi",
+            "zh-CN": "zh",
+            "zh-HK": "zh-hant",
+            "zh-TW": "zh-hant",
+            "zh-CN": "zh",
+          };
+
+          var supported_languages = [
+            "ar",
+            "cs",
+            "da",
+            "de",
+            "en",
+            "es",
+            "fi",
+            "fr",
+            "hu",
+            "id",
+            "it",
+            "ja",
+            "ko",
+            "nl",
+            "no",
+            "pl",
+            "pt",
+            "ru",
+            "sv",
+            "th",
+            "tr",
+            "vi",
+            "zh-hant",
+            "zh"
+          ];
+
+          let language = url_language_pairs[url_language] || url_language; // Convert the URL language to one of the standardized languages, if possible
 
           // If the specified language is not found in the list of supported languages
           if (supported_languages.indexOf(language) === -1) {
@@ -472,43 +532,108 @@
     //Pass the app, platform and language in from the URL parameters to form the Web Support Portal URL
     document.getElementById("hs-support-frame").src = help_center_url;
       
-    //Handle label of custom Contact Us buuton   
+    // Handle custom messaging or labels based on language  
     switch (language) {
 
-      case "fr":
-          custom_button_label = "Nous contacter";
-          userMessage = "J'ai besoin de vous contacter"
-          break;
-
+      case "ar":
+        userMessage = "أنا بحاجة للاتصال بك";
+        break;
+      
+      case "cs":
+        userMessage = "Musím vás kontaktovat";
+        break;
+      
+      case "da":
+        userMessage = "Jeg skal kontakte dig";
+        break;
+      
       case "de":
-          custom_button_label = "kontaktieren Sie uns";
-          userMessage = "Ich muss dich kontaktieren"
-          break;
-
-      case "es":
-          custom_button_label = "Contáctanos";
-          userMessage = "Necesito contactarte"
-          break;
-
-      case "it":
-          custom_button_label = "Contattaci";
-          userMessage = "Ho bisogno di contattarti"
-          break;
-
-      case "pt":
-          custom_button_label = "Contate-Nos";
-          userMessage = "Eu preciso entrar em contato com você"
-          break;
-
-      case "ru":
-          custom_button_label = "Связаться";
-          userMessage = "Мне нужно с тобой связаться"
-          break;
+        userMessage = "Ich muss dich kontaktieren";
+        break;
 
       case "en":
-          custom_button_label = "Contact Us";
-          userMessage = "I need to contact you"
-          break;
+        userMessage = "I need to contact you";
+        break;
+
+      case "es":
+        userMessage = "Necesito contactarte";
+        break;
+      
+      case "fi":
+        userMessage = "Minun täytyy ottaa sinuun yhteyttä";
+        break;
+
+      case "fr":
+        userMessage = "J'ai besoin de vous contacter";
+        break;
+      
+      case "hu":
+        userMessage = "Kapcsolatba kell lépnem veled";
+        break;
+      
+      case "id":
+        userMessage = "Saya perlu menghubungi Anda";
+        break;
+
+      case "it":
+        userMessage = "Ho bisogno di contattarti";
+        break;
+      
+      case "ja":
+        userMessage = "私はあなたに連絡する必要があります";
+        break;
+      
+      case "ko":
+        userMessage = "나는 당신에게 연락해야합니다";
+        break;
+
+      case "nl":
+        userMessage = "Ik moet contact met je opnemen";
+        break;
+      
+      case "no":
+        userMessage = "Jeg må kontakte deg";
+        break;
+      
+      case "pl":
+        userMessage = "muszę się z tobą skontaktować";
+        break;
+
+      case "pt":
+        userMessage = "Eu preciso entrar em contato com você";
+        break;
+
+      case "ru":
+        userMessage = "Мне нужно с тобой связаться";
+        break;
+      
+      case "sv":
+        userMessage = "Jag måste kontakta dig";
+        break;
+      
+      case "th":
+        userMessage = "ฉันต้องติดต่อคุณ";
+        break;
+      
+      case "tr":
+        userMessage = "Sizinle iletişime geçmem lazım";
+        break;
+      
+      case "vi":
+        userMessage = "Tôi cần liên hệ với bạn";
+        break;
+      
+      case "zh":
+        userMessage = "我需要联系你";
+        break;
+      
+      case "zh-hant":
+        userMessage = "我需要聯繫你";
+        break;
+      
+      default:
+        userMessage = "I need to contact you";
+        break;
     }
 
   var label = document.getElementsByClassName("notification");
@@ -521,7 +646,7 @@
       var PLATFORM_ID = hsappid,
       DOMAIN = "ubisoft-mobile",
       LANGUAGE = language;
-      
+
       window.helpshiftConfig = {
         platformId: PLATFORM_ID,
         domain: DOMAIN,
@@ -545,7 +670,7 @@
     //If the widget is opened and then closed (lisening to the event handler)
     var widgetToggleEventHandler = function(data) {
       
-      if (data.visible == false) {
+      if (data.visible === false) {
         // Helpshift("hide");
       }
     }
