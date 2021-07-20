@@ -40,11 +40,13 @@
 
           let misc_split_array = `${misc || ''}`.split(';');
           let misc_split_string = misc_split_array.join('\n');
-          console.log(`param_payer: ${param_payer} (${typeof param_payer})`);
-          // let payer = `${param_payer || ''}`.toLowerCase();
+          
           if (typeof param_payer === 'undefined') {
             param_payer = param['payer'];
-            console.log(`replaced param_payer: ${param_payer}`);
+          }
+
+          else if (typeof param_payer === 'string') {
+            param_payer = param_payer.toLowerCase();
           }
 
           if ((param_payer !== true) && (param_payer !== false)) {
@@ -59,7 +61,7 @@
           }
 
           let payer = (param_payer === true);
-          console.log(`payer: ${payer}`);
+          
           //other variables
           let hs_app_full_name = '';
           var hsappid = '';
@@ -250,7 +252,7 @@
             case "09652083c662e18aec88d9cbbd11061c":
               hsappid = "ubisoft-mobile_platform_20210608083611959-08c7b838d5d3f00";
               hsapp = "38-is-it-love-daryl";
-              hs_app_full_name = "Is it Love? Daryl";
+              hs_app_full_name = "Is It Love? Daryl";
               break;
 
             // Is it Love? Drogo
@@ -731,6 +733,12 @@
       "dnaid": {
         type: "singleline",
         value: dnaid
+      },
+
+      // This one is being populated as an extra
+      "iap": {
+        type: "checkbox",
+        value: payer
       },
 
       "payer": {
