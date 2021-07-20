@@ -25,7 +25,7 @@
           var param_language = param['language'] || param['lang'];
           var url_language = `${param_language || ''}`.toLowerCase();
           var dnaid = unescape(param['dnaID'] || param['dnaid'] || '');
-          var param_payer = param['payer'] || "iap";
+          var param_payer = param['iap'];
           var ingameid = param['igpid'] || param['ingameID'];
           var fbid = param['fbId'];
           var bundleid = param['bundleId'];
@@ -41,7 +41,26 @@
           let misc_split_array = `${misc || ''}`.split(';');
           let misc_split_string = misc_split_array.join('\n');
           
-          let payer = `${param_payer || ''}`.toLowerCase();
+          if (typeof param_payer === 'undefined') {
+            param_payer = param['payer'];
+          }
+
+          else if (typeof param_payer === 'string') {
+            param_payer = param_payer.toLowerCase();
+          }
+
+          if ((param_payer !== true) && (param_payer !== false)) {
+
+            try {
+              param_payer = JSON.parse(param_payer);
+            }
+
+            catch (e_exception) {
+              param_payer = undefined;
+            }
+          }
+
+          let payer = (param_payer === true);
           
           //other variables
           let hs_app_full_name = '';
@@ -233,7 +252,7 @@
             case "09652083c662e18aec88d9cbbd11061c":
               hsappid = "ubisoft-mobile_platform_20210608083611959-08c7b838d5d3f00";
               hsapp = "38-is-it-love-daryl";
-              hs_app_full_name = "Is it Love? Daryl";
+              hs_app_full_name = "Is It Love? Daryl";
               break;
 
             // Is it Love? Drogo
@@ -714,6 +733,12 @@
       "dnaid": {
         type: "singleline",
         value: dnaid
+      },
+
+      // This one is being populated as an extra
+      "iap": {
+        type: "checkbox",
+        value: payer
       },
 
       "payer": {
