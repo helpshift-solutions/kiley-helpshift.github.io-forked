@@ -24,8 +24,8 @@
           let cstsuid = param['cstsuid'];
           var param_language = param['language'] || param['lang'];
           var url_language = `${param_language || ''}`.toLowerCase();
-          var dnaid = unescape(param['dnaID'] || '');
-          var param_payer = param['payer'];
+          var dnaid = unescape(param['dnaID'] || param['dnaid'] || '');
+          var param_payer = param['iap'];
           var ingameid = param['igpid'] || param['ingameID'];
           var fbid = param['fbId'];
           var bundleid = param['bundleId'];
@@ -41,7 +41,12 @@
           let misc_split_array = `${misc || ''}`.split(';');
           let misc_split_string = misc_split_array.join('\n');
           
-          let payer = `${param_payer || ''}`.toLowerCase();
+          // let payer = `${param_payer || ''}`.toLowerCase();
+          if (typeof param_payer === 'undefined') {
+            param_payer = param['payer'];
+          }
+
+          let payer = (param_payer === true);
           
           //other variables
           let hs_app_full_name = '';
@@ -59,6 +64,8 @@
           
           let url_language_pairs = {
             "ar-ar": "ar",
+            "cn": "zh",
+            "cs-cz": "cs",
             "da-dk": "da",
             "de-de": "de",
             "en-au": "en",
@@ -86,6 +93,7 @@
             "ru-ru": "ru",
             "sv-se": "sv",
             "th-th": "th",
+            "tr-tr": "tr",
             "vi-vn": "vi",
             "zh-cn": "zh",
             "zh-hk": "zh-hant",
