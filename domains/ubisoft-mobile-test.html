@@ -44,6 +44,7 @@
           // let payer = `${param_payer || ''}`.toLowerCase();
           if (typeof param_payer === 'undefined') {
             param_payer = param['payer'];
+            console.log(`replaced param_payer: ${param_payer}`);
           }
 
           let payer = (param_payer === true);
