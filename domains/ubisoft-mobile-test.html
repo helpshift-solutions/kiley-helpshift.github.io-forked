@@ -47,6 +47,17 @@
             console.log(`replaced param_payer: ${param_payer}`);
           }
 
+          if ((param_payer !== true) && (param_payer !== false)) {
+
+            try {
+              param_payer = JSON.parse(param_payer);
+            }
+
+            catch (e_exception) {
+              param_payer = undefined;
+            }
+          }
+
           let payer = (param_payer === true);
           console.log(`payer: ${payer}`);
           //other variables
