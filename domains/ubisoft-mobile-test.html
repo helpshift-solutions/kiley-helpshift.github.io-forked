@@ -40,7 +40,7 @@
 
           let misc_split_array = `${misc || ''}`.split(';');
           let misc_split_string = misc_split_array.join('\n');
-          console.log(`param_payer: ${param_payer}`);
+          console.log(`param_payer: ${param_payer} (${typeof param_payer})`);
           // let payer = `${param_payer || ''}`.toLowerCase();
           if (typeof param_payer === 'undefined') {
             param_payer = param['payer'];
