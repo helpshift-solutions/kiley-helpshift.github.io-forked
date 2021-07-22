@@ -508,6 +508,27 @@
         return false;
       }
 
+      function makeElementAdjustments() {
+        console.log('running makeElementAdjustments()');
+        // if (deviceIsAndroid() === true) {
+          var android_spacer = $('<div/>', {
+            'class' : 'android_spacer',
+            'id' : 'android_spacer'
+            }).css({
+            'width' : '100%',
+            'height' : '0px'
+            });
+            table.append(android_spacer);
+
+            if (isMobile.Android())
+            {
+            $('#description').focus(function() { $('#android_spacer').css({'width' : '100%', 'height' : '250px'});
+            window.scrollTo(0,document.getElementById('description').scrollHeight);});
+            $('#description').blur(function() { $('#android_spacer').css({'width' : '100%', 'height' : '0px'}); });
+            }
+        // }
+      }
+
       //function to open Helpshift, from the Contact Us button
       function openHelpshift() {
 
@@ -733,6 +754,10 @@
       
       if (data.visible === false) {
         // Helpshift("hide");
+      }
+
+      if (data.visible === true) {
+        makeElementAdjustments();
       }
     }
 
