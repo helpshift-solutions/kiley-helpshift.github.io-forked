@@ -870,7 +870,12 @@
         value: misc_split_string
       }
     });
-      
+    
+    Window.addEventListener('resize', handler_windowResize);
+
+    function handler_windowResize() {
+      console.log(`The window is resized`);
+    }
   </script>
 
       </div>
