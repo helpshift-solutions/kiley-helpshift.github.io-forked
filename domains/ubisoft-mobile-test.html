@@ -871,12 +871,17 @@
       }
     });
     
-    window.addEventListener('resize', handler_windowResize);
+    document.addEventListener('load', function() {
 
-    function handler_windowResize(p_data) {
-      console.log(`The window is resized`);
-      console.log(p_data);
-    }
+      console.log('the document has loaded!');
+      
+      window.addEventListener('resize', handler_windowResize);
+      
+      function handler_windowResize(p_data) {
+        console.log(`The window is resized`);
+        console.log(p_data);
+      }
+    });
   </script>
 
       </div>
