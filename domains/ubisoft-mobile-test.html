@@ -599,7 +599,7 @@
 
 <body style="margin-right:0;margin-left:0">
 
-  <div style="position: absolute; height:100%;width:100%; margin-top: 0;margin-left: 0; z-index: 10;">
+  <!-- <div id="innerBody" style="background-color: green; position: absolute; height:100%;width:100%; margin-top: 0;margin-left: 0; z-index: 10; overflow: scroll;"> -->
 <!-- <body style="margin-top: -20px;margin-right:0;margin-left:0"> -->
 
   <!-- <h1 style="font-size: 16px;text-align: center;font-family: Roboto; font-weight: bold; padding-top: 40px;padding-bottom: 20px;background-color:#0C1921;color:#b9cad3;margin-top: 0px;margin-bottom: 0px;">Faqs</h1> -->
@@ -879,7 +879,7 @@
       
         let window_size_original = window.innerHeight;
         let window_size_resized;
-        
+        // $('#innerBody').css('height', window_size_original-100);
         window.addEventListener('resize', handler_windowResize);
 
         function handler_windowResize(p_data) {
@@ -887,7 +887,8 @@
           window_size_resized = p_data.target.innerHeight;
 
           let window_size_difference = window_size_original - window_size_resized;
-
+          // $('#innerBody').css('height', window_size_original-window_size_difference - 100);
+          $('#innerBody').css('height', window_size_difference);
           console.log(`Original: ${window_size_original}`);
           console.log(`Resized: ${window_size_resized}`);
           console.log(`Difference: ${window_size_difference}`);
@@ -896,6 +897,7 @@
     };
   </script>
 
+  <div id="innerBody" style="background-color: aqua; height: 0; width: 100%;">
       </div>
   </body>
 
