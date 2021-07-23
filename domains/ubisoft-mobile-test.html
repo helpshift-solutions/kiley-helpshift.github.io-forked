@@ -889,6 +889,7 @@
           let window_size_difference = window_size_original - window_size_resized;
           // $('#innerBody').css('height', window_size_original-window_size_difference - 100);
           $('#innerBody').css('height', window_size_difference);
+          window.scrollTo(0, window_size_original);
           console.log(`Original: ${window_size_original}`);
           console.log(`Resized: ${window_size_resized}`);
           console.log(`Difference: ${window_size_difference}`);
