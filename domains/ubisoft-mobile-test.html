@@ -871,26 +871,29 @@
       }
     });
     
-    document.addEventListener('load', function() {
+    document.onreadystatechange = function() {
 
-      console.log('the document has loaded!');
+      if (document.readyState === 'complete') {
+        
+        console.log('the document has loaded!');
       
-      let window_size_original = window.innerHeight;
-      let window_size_resized;
-      
-      window.addEventListener('resize', handler_windowResize);
+        let window_size_original = window.innerHeight;
+        let window_size_resized;
+        
+        window.addEventListener('resize', handler_windowResize);
 
-      function handler_windowResize(p_data) {
-        console.log(`The window is resized`);
-        window_size_resized = p_data.target.innerHeight;
+        function handler_windowResize(p_data) {
+          console.log(`The window is resized`);
+          window_size_resized = p_data.target.innerHeight;
 
-        let window_size_difference = window_size_original - window_size_resized;
+          let window_size_difference = window_size_original - window_size_resized;
 
-        console.log(`Original: ${window_size_original}`);
-        console.log(`Resized: ${window_size_resized}`);
-        console.log(`Difference: ${window_size_difference}`);
+          console.log(`Original: ${window_size_original}`);
+          console.log(`Resized: ${window_size_resized}`);
+          console.log(`Difference: ${window_size_difference}`);
+        }
       }
-    });
+    };
   </script>
 
       </div>
