@@ -4,15 +4,37 @@
 
   <head>
 
-    <!-- <link rel="icon" href="https://d2fs58k4ez69fv.cloudfront.net/88db157d41d3d3263d8de9701eda6df5a268b2911e5a60f1dd25b0b6c509cba5" /> -->
-
     <meta charset="UTF-8" />
 
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
-      /* @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); */
-    </style>
+    <script>
+      document.onreadystatechange = function() {
+
+      if (document.readyState === 'complete') {
+        
+        console.log('the document has loaded!');
+      
+        let window_size_original = window.innerHeight;
+        let window_size_resized;
+        // $('#innerBody').css('height', window_size_original-100);
+        window.addEventListener('resize', handler_windowResize);
+
+        function handler_windowResize(p_data) {
+          console.log(`The window is resized`);
+          window_size_resized = p_data.target.innerHeight;
+
+          let window_size_difference = window_size_original - window_size_resized;
+          // $('#innerBody').css('height', window_size_original-window_size_difference - 100);
+          $('#innerBody').css('height', window_size_difference);
+          window.scrollTo(0, window_size_original);
+          console.log(`Original: ${window_size_original}`);
+          console.log(`Resized: ${window_size_resized}`);
+          console.log(`Difference: ${window_size_difference}`);
+        }
+      }
+    };
+    </script>
     
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
     
@@ -543,10 +565,7 @@
       }
 
     </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     
-      
-      
     <style>
 
       .center {
@@ -870,34 +889,9 @@
         value: misc_split_string
       }
     });
-    
-    document.onreadystatechange = function() {
 
-      if (document.readyState === 'complete') {
-        
-        console.log('the document has loaded!');
-      
-        let window_size_original = window.innerHeight;
-        let window_size_resized;
-        // $('#innerBody').css('height', window_size_original-100);
-        window.addEventListener('resize', handler_windowResize);
-
-        function handler_windowResize(p_data) {
-          console.log(`The window is resized`);
-          window_size_resized = p_data.target.innerHeight;
-
-          let window_size_difference = window_size_original - window_size_resized;
-          // $('#innerBody').css('height', window_size_original-window_size_difference - 100);
-          $('#innerBody').css('height', window_size_difference);
-          window.scrollTo(0, window_size_original);
-          console.log(`Original: ${window_size_original}`);
-          console.log(`Resized: ${window_size_resized}`);
-          console.log(`Difference: ${window_size_difference}`);
-        }
-      }
-    };
   </script>
-
+  
   <div id="innerBody" style="background-color: aqua; height: 0; width: 100%;">
       </div>
   </body>
