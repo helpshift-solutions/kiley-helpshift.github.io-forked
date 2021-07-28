@@ -609,6 +609,16 @@
         color: white;
       }
 
+      #innerBody {
+        background-color: aqua;
+        height: 100%;
+        left: 0;
+        overflow-y: auto;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
+
     </style>
 
     <!-- <title>Is It Love?</title> -->
@@ -618,282 +628,284 @@
 
 <body style="margin-right:0;margin-left:0">
 
-  <!-- <div id="innerBody" style="background-color: green; position: absolute; height:100%;width:100%; margin-top: 0;margin-left: 0; z-index: 10; overflow: scroll;"> -->
-<!-- <body style="margin-top: -20px;margin-right:0;margin-left:0"> -->
+  <div id="innerBody" style="background-color: aqua; height: 100%; width: 100%;">
+  
+    <!-- <div id="innerBody" style="background-color: green; position: absolute; height:100%;width:100%; margin-top: 0;margin-left: 0; z-index: 10; overflow: scroll;"> -->
+    <!-- <body style="margin-top: -20px;margin-right:0;margin-left:0"> -->
 
-  <!-- <h1 style="font-size: 16px;text-align: center;font-family: Roboto; font-weight: bold; padding-top: 40px;padding-bottom: 20px;background-color:#0C1921;color:#b9cad3;margin-top: 0px;margin-bottom: 0px;">Faqs</h1> -->
+    <!-- <h1 style="font-size: 16px;text-align: center;font-family: Roboto; font-weight: bold; padding-top: 40px;padding-bottom: 20px;background-color:#0C1921;color:#b9cad3;margin-top: 0px;margin-bottom: 0px;">Faqs</h1> -->
 
-  <button style="font-family: Roboto!important" class="notification" onclick="openHelpshift()" type="button">
+      <button style="font-family: Roboto!important" class="notification" onclick="openHelpshift()" type="button">
 
-    <span>Inbox</span>
-    <span class="badge">0</span>
+        <span>Inbox</span>
+        <span class="badge">0</span>
 
-  </button>
+      </button>
 
-  <iframe id="hs-support-frame" width="100%" height="880px" frameborder="0"></iframe>
-      
-  <script>
+      <iframe id="hs-support-frame" width="100%" height="880px" frameborder="0"></iframe>
+          
+      <script>
 
-    let help_center_url = "https://ubisoft-mobile.helpshift.com/a/" + hsapp + "/?p=" + hs_faq_platform + "&l=" + language;
-    help_center_url = `https://ubisoft-mobile.helpshift.com/hc/${language}/${hsapp}/?hbhf=1&han=1&hpn=1&hww=1&p=${hs_faq_platform}`;
+        let help_center_url = "https://ubisoft-mobile.helpshift.com/a/" + hsapp + "/?p=" + hs_faq_platform + "&l=" + language;
+        help_center_url = `https://ubisoft-mobile.helpshift.com/hc/${language}/${hsapp}/?hbhf=1&han=1&hpn=1&hww=1&p=${hs_faq_platform}`;
 
-    //Pass the app, platform and language in from the URL parameters to form the Web Support Portal URL
-    document.getElementById("hs-support-frame").src = help_center_url;
-      
-    // Handle custom messaging or labels based on language  
-    switch (language) {
+        //Pass the app, platform and language in from the URL parameters to form the Web Support Portal URL
+        document.getElementById("hs-support-frame").src = help_center_url;
+          
+        // Handle custom messaging or labels based on language  
+        switch (language) {
 
-      case "ar":
-        userMessage = "أنا بحاجة للاتصال بك";
-        break;
-      
-      case "cs":
-        userMessage = "Musím vás kontaktovat";
-        break;
-      
-      case "da":
-        userMessage = "Jeg skal kontakte dig";
-        break;
-      
-      case "de":
-        userMessage = "Ich muss dich kontaktieren";
-        break;
+          case "ar":
+            userMessage = "أنا بحاجة للاتصال بك";
+            break;
+          
+          case "cs":
+            userMessage = "Musím vás kontaktovat";
+            break;
+          
+          case "da":
+            userMessage = "Jeg skal kontakte dig";
+            break;
+          
+          case "de":
+            userMessage = "Ich muss dich kontaktieren";
+            break;
 
-      case "en":
-        userMessage = "I need to contact you";
-        break;
+          case "en":
+            userMessage = "I need to contact you";
+            break;
 
-      case "es":
-        userMessage = "Necesito contactarte";
-        break;
-      
-      case "fi":
-        userMessage = "Minun täytyy ottaa sinuun yhteyttä";
-        break;
+          case "es":
+            userMessage = "Necesito contactarte";
+            break;
+          
+          case "fi":
+            userMessage = "Minun täytyy ottaa sinuun yhteyttä";
+            break;
 
-      case "fr":
-        userMessage = "J'ai besoin de vous contacter";
-        break;
-      
-      case "hu":
-        userMessage = "Kapcsolatba kell lépnem veled";
-        break;
-      
-      case "id":
-        userMessage = "Saya perlu menghubungi Anda";
-        break;
+          case "fr":
+            userMessage = "J'ai besoin de vous contacter";
+            break;
+          
+          case "hu":
+            userMessage = "Kapcsolatba kell lépnem veled";
+            break;
+          
+          case "id":
+            userMessage = "Saya perlu menghubungi Anda";
+            break;
 
-      case "it":
-        userMessage = "Ho bisogno di contattarti";
-        break;
-      
-      case "ja":
-        userMessage = "私はあなたに連絡する必要があります";
-        break;
-      
-      case "ko":
-        userMessage = "나는 당신에게 연락해야합니다";
-        break;
+          case "it":
+            userMessage = "Ho bisogno di contattarti";
+            break;
+          
+          case "ja":
+            userMessage = "私はあなたに連絡する必要があります";
+            break;
+          
+          case "ko":
+            userMessage = "나는 당신에게 연락해야합니다";
+            break;
 
-      case "nl":
-        userMessage = "Ik moet contact met je opnemen";
-        break;
-      
-      case "no":
-        userMessage = "Jeg må kontakte deg";
-        break;
-      
-      case "pl":
-        userMessage = "muszę się z tobą skontaktować";
-        break;
+          case "nl":
+            userMessage = "Ik moet contact met je opnemen";
+            break;
+          
+          case "no":
+            userMessage = "Jeg må kontakte deg";
+            break;
+          
+          case "pl":
+            userMessage = "muszę się z tobą skontaktować";
+            break;
 
-      case "pt":
-        userMessage = "Eu preciso entrar em contato com você";
-        break;
+          case "pt":
+            userMessage = "Eu preciso entrar em contato com você";
+            break;
 
-      case "ru":
-        userMessage = "Мне нужно с тобой связаться";
-        break;
-      
-      case "sv":
-        userMessage = "Jag måste kontakta dig";
-        break;
-      
-      case "th":
-        userMessage = "ฉันต้องติดต่อคุณ";
-        break;
-      
-      case "tr":
-        userMessage = "Sizinle iletişime geçmem lazım";
-        break;
-      
-      case "vi":
-        userMessage = "Tôi cần liên hệ với bạn";
-        break;
-      
-      case "zh":
-        userMessage = "我需要联系你";
-        break;
-      
-      case "zh-hant":
-        userMessage = "我需要聯繫你";
-        break;
-      
-      default:
-        userMessage = "I need to contact you";
-        break;
-    }
+          case "ru":
+            userMessage = "Мне нужно с тобой связаться";
+            break;
+          
+          case "sv":
+            userMessage = "Jag måste kontakta dig";
+            break;
+          
+          case "th":
+            userMessage = "ฉันต้องติดต่อคุณ";
+            break;
+          
+          case "tr":
+            userMessage = "Sizinle iletişime geçmem lazım";
+            break;
+          
+          case "vi":
+            userMessage = "Tôi cần liên hệ với bạn";
+            break;
+          
+          case "zh":
+            userMessage = "我需要联系你";
+            break;
+          
+          case "zh-hant":
+            userMessage = "我需要聯繫你";
+            break;
+          
+          default:
+            userMessage = "I need to contact you";
+            break;
+        }
 
-  var label = document.getElementsByClassName("notification");
+      var label = document.getElementsByClassName("notification");
 
-  label[0].children[0].innerText = custom_button_label;
-  label[0].children[1].hidden = true;
+      label[0].children[0].innerText = custom_button_label;
+      label[0].children[1].hidden = true;
 
-    //Helpshift Web Chat
-    (function () {
-      var PLATFORM_ID = hsappid,
-      DOMAIN = "ubisoft-mobile",
-      LANGUAGE = language;
+        //Helpshift Web Chat
+        (function () {
+          var PLATFORM_ID = hsappid,
+          DOMAIN = "ubisoft-mobile",
+          LANGUAGE = language;
 
-      window.helpshiftConfig = {
-        platformId: PLATFORM_ID,
-        domain: DOMAIN,
-        language: LANGUAGE,
-        uiConfig: {
-          global: {
-            color: "#153141", 
-            fontFamily: "Roboto, Helvetica, sans-serif"
+          window.helpshiftConfig = {
+            platformId: PLATFORM_ID,
+            domain: DOMAIN,
+            language: LANGUAGE,
+            uiConfig: {
+              global: {
+                color: "#153141", 
+                fontFamily: "Roboto, Helvetica, sans-serif"
+              }
+            }
+          };
+        }) ();
+
+        !function(t,e){if("function"!=typeof window.Helpshift){var n=function(){n.q.push(arguments)};n.q=[],window.Helpshift=n;var i,a=t.getElementsByTagName("script")[0];if(t.getElementById(e))return;i=t.createElement("script"),i.async=!0,i.id=e,i.src="https://webchat.helpshift.com/latest/webChat.js";var o=function(){window.Helpshift("init")};window.attachEvent?i.attachEvent("onload",o):i.addEventListener("load",o,!1),a.parentNode.insertBefore(i,a)}else window.Helpshift("update")}(document,"hs-chat");
+        
+        //Hide Helpshift by default, as we'll use a custom button
+        Helpshift("setInitialUserMessage", userMessage)
+        // Helpshift("close");
+        // Helpshift("hide");
+        
+        //If the widget is opened and then closed (lisening to the event handler)
+        var widgetToggleEventHandler = function(data) {
+          
+          if (data.visible === false) {
+            // Helpshift("hide");
+          }
+
+          if (data.visible === true) {
+            makeElementAdjustments();
           }
         }
-      };
-    }) ();
 
-    !function(t,e){if("function"!=typeof window.Helpshift){var n=function(){n.q.push(arguments)};n.q=[],window.Helpshift=n;var i,a=t.getElementsByTagName("script")[0];if(t.getElementById(e))return;i=t.createElement("script"),i.async=!0,i.id=e,i.src="https://webchat.helpshift.com/latest/webChat.js";var o=function(){window.Helpshift("init")};window.attachEvent?i.attachEvent("onload",o):i.addEventListener("load",o,!1),a.parentNode.insertBefore(i,a)}else window.Helpshift("update")}(document,"hs-chat");
-    
-    //Hide Helpshift by default, as we'll use a custom button
-    Helpshift("setInitialUserMessage", userMessage)
-    // Helpshift("close");
-    // Helpshift("hide");
-    
-    //If the widget is opened and then closed (lisening to the event handler)
-    var widgetToggleEventHandler = function(data) {
-      
-      if (data.visible === false) {
-        // Helpshift("hide");
-      }
+        //Event handler to listen for web chat widget changes
+        Helpshift("addEventListener", "widgetToggle", widgetToggleEventHandler);
 
-      if (data.visible === true) {
-        makeElementAdjustments();
-      }
-    }
+        //Event for unread messagages (update custom button badge)
+        var newUnreadMessagesEventHandler = function(data) {
 
-    //Event handler to listen for web chat widget changes
-    Helpshift("addEventListener", "widgetToggle", widgetToggleEventHandler);
+          if (data.unreadCount > 0) {
+            label[0].children[1].hidden = false;
+            label[0].children[1].innerText = data.unreadCount;
+          }
 
-    //Event for unread messagages (update custom button badge)
-    var newUnreadMessagesEventHandler = function(data) {
+          else {
+            label[0].children[1].hidden = true;
+          }
+        }
 
-      if (data.unreadCount > 0) {
-        label[0].children[1].hidden = false;
-        label[0].children[1].innerText = data.unreadCount;
-      }
+        Helpshift("addEventListener", "newUnreadMessages", newUnreadMessagesEventHandler);
 
-      else {
-        label[0].children[1].hidden = true;
-      }
-    }
+        //Fill the custom issue fields with the URL parameters (via the local variables)
+        Helpshift("setCustomIssueFields", {
 
-    Helpshift("addEventListener", "newUnreadMessages", newUnreadMessagesEventHandler);
+          "country": {
+            type: "singleline",
+            value: country
+          },
 
-    //Fill the custom issue fields with the URL parameters (via the local variables)
-    Helpshift("setCustomIssueFields", {
+          "user_language": {
+            type: "dropdown",
+            value: language
+          },
 
-      "country": {
-        type: "singleline",
-        value: country
-      },
+          "dnaid": {
+            type: "singleline",
+            value: dnaid
+          },
 
-      "user_language": {
-        type: "dropdown",
-        value: language
-      },
+          // This one is being populated as an extra
+          "iap": {
+            type: "checkbox",
+            value: payer
+          },
 
-      "dnaid": {
-        type: "singleline",
-        value: dnaid
-      },
+          "payer": {
+            type: "checkbox",
+            value: payer
+          },
 
-      // This one is being populated as an extra
-      "iap": {
-        type: "checkbox",
-        value: payer
-      },
+          "ingameid": {
+            type: "singleline",
+            value: ingameid
+          },
 
-      "payer": {
-        type: "checkbox",
-        value: payer
-      },
+          "fbid": {
+            type: "singleline",
+            value: fbid
+          },
 
-      "ingameid": {
-        type: "singleline",
-        value: ingameid
-      },
+          "bundleid": {
+            type: "singleline",
+            value: bundleid
+          },
 
-      "fbid": {
-        type: "singleline",
-        value: fbid
-      },
+          "game": {
+            type: "dropdown",
+            value: hs_app_full_name
+          },
 
-      "bundleid": {
-        type: "singleline",
-        value: bundleid
-      },
+          "progression": {
+            type: "singleline",
+            value: progression
+          },
 
-      "game": {
-        type: "dropdown",
-        value: hs_app_full_name
-      },
+          "platform": {
+            type: "dropdown",
+            value: platform
+          },
 
-      "progression": {
-        type: "singleline",
-        value: progression
-      },
+          "platform": {
+            type: "dropdown",
+            value: platform
+          },
 
-      "platform": {
-        type: "dropdown",
-        value: platform
-      },
+          "osversion": {
+            type: "singleline",
+            value: osversion
+          },
 
-      "platform": {
-        type: "dropdown",
-        value: platform
-      },
+          "device": {
+            type: "singleline",
+            value: device
+          },
 
-      "osversion": {
-        type: "singleline",
-        value: osversion
-      },
+          "model": {
+            type: "singleline",
+            value: model
+          },
 
-      "device": {
-        type: "singleline",
-        value: device
-      },
+          "misc": {
+            type: "multiline",
+            value: misc_split_string
+          }
+        });
 
-      "model": {
-        type: "singleline",
-        value: model
-      },
+      </script>
 
-      "misc": {
-        type: "multiline",
-        value: misc_split_string
-      }
-    });
+    </div>
 
-  </script>
-  
-  <div id="innerBody" style="background-color: aqua; height: 0; width: 100%;">
-      </div>
-  </body>
+</body>
 
 </html>
