@@ -19,21 +19,21 @@
         let window_size_resized;
         // $('#innerBody').css('height', window_size_original-100);
         window.addEventListener('resize', handler_windowResize);
-
-        function handler_windowResize(p_data) {
-          console.log(`The window is resized`);
-          window_size_resized = p_data.target.innerHeight;
-
-          let window_size_difference = window_size_original - window_size_resized;
-          // $('#innerBody').css('height', window_size_original-window_size_difference - 100);
-          $('#innerBody').css('height', window_size_difference);
-          window.scrollTo(0, window_size_original);
-          console.log(`Original: ${window_size_original}`);
-          console.log(`Resized: ${window_size_resized}`);
-          console.log(`Difference: ${window_size_difference}`);
-        }
       }
     };
+    
+    function handler_windowResize(p_data) {
+      console.log(`The window is resized`);
+      window_size_resized = p_data.target.innerHeight;
+
+      let window_size_difference = window_size_original - window_size_resized;
+      $('#innerBody').css('height', window_size_original-window_size_difference - 100);
+      // $('#innerBody').css('height', window_size_difference);
+      window.scrollTo(0, window_size_original);
+      console.log(`Original: ${window_size_original}`);
+      console.log(`Resized: ${window_size_resized}`);
+      console.log(`Difference: ${window_size_difference}`);
+    }
     </script>
     
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
