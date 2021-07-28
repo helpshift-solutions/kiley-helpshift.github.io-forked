@@ -23,8 +23,8 @@
         if (deviceIsAndroid() || true) {
 
           // Move everything up 33%
-          $($('iframe')[2]).css('bottom','500px');
-          $('#hs-web-sdk-iframe').css('bottom','500px');
+          // $($('iframe')[2]).css('bottom','500px');
+          // $('#hs-web-sdk-iframe').css('bottom','500px');
         }
       }
     };
@@ -552,7 +552,7 @@
             'width' : '100%',
             'height' : '0px'
             });
-            $('body').append(android_spacer);
+            // $('body').append(android_spacer);
 
             /*if (isMobile.Android())
             {
@@ -808,6 +808,8 @@
 
           if (data.visible === true) {
             makeElementAdjustments();
+            $($('iframe')[2]).css('bottom','500px');
+            $('#hs-web-sdk-iframe').css('bottom','500px');
           }
         }
 
