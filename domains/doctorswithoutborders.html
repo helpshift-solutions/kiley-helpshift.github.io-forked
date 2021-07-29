@@ -4,8 +4,8 @@
 
         <script type="text/javascript">
 
-            const INACTIVITY_THRESHOLD_SECONDS_PAGE = 3;
-            const INACTIVITY_THRESHOLD_SECONDS_WIDGET = 5;
+            const INACTIVITY_THRESHOLD_SECONDS_PAGE = 3.0;
+            const INACTIVITY_THRESHOLD_SECONDS_WIDGET = 5.0;
 
             let inactivity_interval_page;
             let inactivity_interval_widget;
@@ -47,8 +47,6 @@
                 }) ();
 
                 !function(t,e){if("function"!=typeof window.Helpshift){var n=function(){n.q.push(arguments)};n.q=[],window.Helpshift=n;var i,a=t.getElementsByTagName("script")[0];if(t.getElementById(e))return;i=t.createElement("script"),i.async=!0,i.id=e,i.src="https://webchat.helpshift.com/webChat.js";var o=function(){window.Helpshift("init")};window.attachEvent?i.attachEvent("onload",o):i.addEventListener("load",o,!1),a.parentNode.insertBefore(i,a)}else window.Helpshift("update")}(document,"hs-chat");
-
-                // Helpshift('show');
             }
 
             function handleEvent_conversationStart(p_data) {
@@ -85,11 +83,11 @@
             }
 
             function handleEvent_widgetToggle(p_data) {
-console.log(p_data);
+
                 if (!(p_data instanceof Object)) {
                     throw new TypeError(`The first parameter of this function must be an Object instance: ${p_data}`);
                 }
-console.log(`p_data.visible: ${p_data.visible}`);
+
                 if (p_data.visible === true) {
                     
                     stopPageActivityWatcher();
