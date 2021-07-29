@@ -31,7 +31,7 @@
                 
                 if (page_parameters_string.length > 0) {
 
-                    full_iframe_target_url = full_iframe_target_url + `${page_parameters_string}`;
+                    full_iframe_target_url = full_iframe_target_url + `?${page_parameters_string}`;
                 }
 
                 $('#page-containment').attr('src', full_iframe_target_url);
