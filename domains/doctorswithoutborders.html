@@ -122,11 +122,11 @@
                     let current_time = new Date();
                     let elapsed_time = (current_time - time_started) / 1000;
 
-                    let elapsed_time_string = `${elapsed_time} seconds`;
+                    let elapsed_time_string = `${elapsed_time.toFixed(3)} seconds`;
 
                     document.getElementById('elapsed_time_page_inactivity').innerText = elapsed_time_string;
                     
-                }, 250);
+                }, 50);
             }
 
             function startWidgetActivityWatcher() {
@@ -148,11 +148,11 @@
                     let current_time = new Date();
                     let elapsed_time = (current_time - time_started) / 1000;
 
-                    let elapsed_time_string = `${elapsed_time} seconds`;
+                    let elapsed_time_string = `${elapsed_time.toFixed(3)} seconds`;
 
                     document.getElementById('elapsed_time_widget_inactivity').innerText = elapsed_time_string;
                     
-                }, 250);
+                }, 50);
             }
 
             function stopPageActivityWatcher() {
