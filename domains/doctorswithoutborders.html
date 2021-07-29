@@ -96,6 +96,11 @@
 
                     console.log(`The widget was opened manually, so the page activity watcher was cleared.`);
                 }
+
+                else if (p_data.visible === 'false') {
+                    
+                    stopWidgetActivityWatcher();
+                }
             }
 
             function startPageActivityWatcher() {
@@ -106,6 +111,7 @@
                     
                     Helpshift('open');
 
+                    stopPageActivityWatcher();
                     startWidgetActivityWatcher();
 
                     console.log(`The timer threshold (${INACTIVITY_THRESHOLD_SECONDS_PAGE}s) for inactivity on the page has been reached, so the widget was opened.`);
