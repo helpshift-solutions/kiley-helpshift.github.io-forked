@@ -1,0 +1,58 @@
+<html>
+
+    <head>
+
+        <script type="text/javascript">
+
+            const INACTIVITY_THRESHOLD_SECONDS_PAGE = 3;
+            const INACTIVITY_THRESHOLD_SECONDS_WIDGET = 10;
+
+            document.onreadystatechange = function() {
+
+                if (document.readyState === 'complete') {
+                    
+                    loadHelpshiftChatWidget();
+
+                    startActivityWatcher();
+                }
+            }
+
+            let inactivity_timer_page;
+            let inactivity_timer_widget;
+
+            function loadHelpshiftChatWidget() {
+                (function () {
+                    var PLATFORM_ID = "doctorswithoutborders_platform_20210713132434253-a3b22f48bdb4f76",
+                    DOMAIN = "doctorswithoutborders",
+                    LANGUAGE = "en";
+
+                    window.helpshiftConfig = {
+                        platformId: PLATFORM_ID,
+                        domain: DOMAIN,
+                        language: LANGUAGE
+                        };
+                }) ();
+
+                !function(t,e){if("function"!=typeof window.Helpshift){var n=function(){n.q.push(arguments)};n.q=[],window.Helpshift=n;var i,a=t.getElementsByTagName("script")[0];if(t.getElementById(e))return;i=t.createElement("script"),i.async=!0,i.id=e,i.src="https://webchat.helpshift.com/webChat.js";var o=function(){window.Helpshift("init")};window.attachEvent?i.attachEvent("onload",o):i.addEventListener("load",o,!1),a.parentNode.insertBefore(i,a)}else window.Helpshift("update")}(document,"hs-chat");
+            }
+
+            function startPageActivityWatcher() {
+
+                inactivity_timer_page = setTimeout(function() {
+                    Helpshift('open');
+                }), INACTIVITY_THRESHOLD_SECONDS_PAGE * 1000;
+            }
+
+            function stopPageActivityWatcher() {
+
+                clearTimeout(inactivity_timer_page);
+            }
+
+        </script>
+
+    </head>
+
+    <body>
+        
+    </body>
+</html>
