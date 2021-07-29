@@ -7,12 +7,16 @@
             const INACTIVITY_THRESHOLD_SECONDS_PAGE = 3;
             const INACTIVITY_THRESHOLD_SECONDS_WIDGET = 5;
 
+            let inactivity_interval_page;
+            let inactivity_interval_widget;
             let inactivity_timer_page;
             let inactivity_timer_widget;
 
             document.onreadystatechange = function() {
 
                 if (document.readyState === 'complete') {
+
+                    populateBodyElements();
 
                     loadHelpshiftChatWidget();
 
@@ -107,15 +111,19 @@
                     console.log(`The timer threshold (${INACTIVITY_THRESHOLD_SECONDS_PAGE}s) for inactivity on the page has been reached, so the widget was opened.`);
 
                 }, timer_max);
-            }
 
-            function stopPageActivityWatcher() {
+                let time_started = new Date();
+                inactivity_interval_page = setInterval(function() {
 
-                clearTimeout(inactivity_timer_page);
+                    let current_time = new Date();
+
+                    document.getElementById('elapsed_time_page_inactivity').innerText = (current_time - time_started);
+                    
+                }, 250);
             }
 
             function startWidgetActivityWatcher() {
-                
+
                 let timer_max = INACTIVITY_THRESHOLD_SECONDS_WIDGET * 1000;
 
                 inactivity_timer_widget = setTimeout(function() {
@@ -123,18 +131,58 @@
 
                     console.log(`The timer threshold (${INACTIVITY_THRESHOLD_SECONDS_WIDGET}s) for inactivity on the widget has been reached, so the widget was closed.`);
                 }, timer_max);
+
+                let time_started = new Date();
+                inactivity_interval_widget = setInterval(function() {
+
+                    let current_time = new Date();
+
+                    document.getElementById('elapsed_time_widget_inactivity').innerText = (current_time - time_started);
+                    
+                }, 250);
+            }
+
+            function stopPageActivityWatcher() {
+
+                clearInterval(inactivity_interval_page);
+                clearTimeout(inactivity_timer_page);
+
+                document.getElementById('elapsed_time_page_inactivity').innerText = 0;
             }
 
             function stopWidgetActivityWatcher() {
 
+                clearInterval(inactivity_interval_widget);
                 clearTimeout(inactivity_timer_widget);
+
+                document.getElementById('elapsed_time_widget_inactivity').innerText = 0;
+            }
+
+            function populateBodyElements() {
+
+                document.getElementById('page_timeout_seconds').innerText = INACTIVITY_THRESHOLD_SECONDS_PAGE;
+                document.getElementById('widget_timeout_seconds').innerText = INACTIVITY_THRESHOLD_SECONDS_WIDGET;
             }
 
         </script>
+
+        <style type="text/css">
+
+        .dynamic-value-set {
+            font-weight: bold;
+        }
+        
+        </style>
 
     </head>
 
     <body>
         
+        <div>
+            The widget will automatically open after <span class="dynamic-value-set"><span class="dynamic-value" id="page_timeout_seconds"></span> seconds</span> of inactivity on the page. (elapsed: <span id="elapsed_time_page_inactivity">0</span>)
+        </div>
+        <div>
+            The widget will automatically open after <span class="dynamic-value-set"><span class="dynamic-value" id="widget_timeout_seconds"></span> seconds</span> of inactivity in the widget. (elapsed: <span id="elapsed_time_widget_inactivity">0</span>)
+        </div>
     </body>
 </html>
