@@ -1,0 +1,116 @@
+<html>
+    
+    <head>
+        
+        <meta charset="UTF-8" />
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+        
+            const page_params = new URLSearchParams(window.location.search);
+
+            let base_url = `https://kiley-helpshift.github.io/domains/ubisoft-mobile-test.html`;
+            // base_url = `https://kiley-helpshift.github.io/domains/ubisoft-mobile-test.html?cstsuid=cf9f3d72addb4e46ba055465eeca282c&country=ID&language=en&iap=false&igpid=2-9KKVS5WG&dnaid=132683068427056430&cstsversion=1.1.8&platform=android&device=android+version%3a4.14.180-perf%2b(1715480009251)%3bandroid+API+Level%3a30%3bdevice%3aOP4BA5L1%3bmodel%3aCPH2113`;
+
+            $(document).ready(function() {
+
+                let page_parameters_array = [];
+                let page_parameters_string = ``;
+
+                for (let current_parameter_key of page_params.keys()) {
+                    
+                    let current_parameter_value = page_params.get(current_parameter_key);
+                    let current_parameter_value_encoded = encodeURIComponent(current_parameter_value);
+                    page_parameters_array.push(`${current_parameter_key}=${current_parameter_value_encoded}`);
+                }
+                
+                page_parameters_string = page_parameters_array.join('&');
+
+                let full_iframe_target_url = base_url;
+                
+                if (page_parameters_string.length > 0) {
+
+                    full_iframe_target_url = full_iframe_target_url + `${page_parameters_string}`;
+                }
+
+                $('#page-containment').attr('src', full_iframe_target_url);
+            });
+
+            // Detects if the device that is loading the page is running the Android operating system
+            function deviceIsAndroid() {
+            
+                let user_agent = navigator.userAgent.toLowerCase();
+
+                // If the word "android" is found in the user agent string
+                if (user_agent.indexOf("android") > -1) {
+
+                    return true;
+                }
+
+                return false;
+            }
+
+            function handleEvent_widgetToggle(p_event) {
+                
+                let event_object = p_event['data'];
+                let event_origin = p_event['origin']
+
+                if (!(event_object instanceof Object)) {
+                    return false;
+                }
+
+                let event_object_message = event_object['message'];
+                let event_object_data = event_object['data'];
+
+                if (event_object_message === 'widgetToggle') {
+
+                    if (!(event_object_data instanceof Object)) {
+                        return false;
+                    }
+
+                    let flag_visibility = (event_object_data['visible'] === true);
+                    
+                    let adjusted_height_for_keyboard = '100%';
+
+                    if (flag_visibility === true) {
+
+                        adjusted_height_for_keyboard = '67%';
+                    }
+
+                    if (deviceIsAndroid() || true) {
+                        $('#page-containment').css('height',adjusted_height_for_keyboard);
+                    }
+                }
+            }
+
+            window.addEventListener("message", handleEvent_widgetToggle);
+        </script>
+
+        <style type="text/css">
+
+            BODY {
+                margin: 0;
+            }
+
+            #page-containment {
+                border: 0;
+                height: 100%;
+                position: fixed;
+                top: 0;
+                bottom: 50%;
+                width: 100%;
+            }
+
+        </style>
+
+    </head>
+    
+    <body>
+<!-- Listen for bubble-up event -->
+<!-- adjust iframe to 67%, otherwise adjust it to 100% -->
+        <iframe id="page-containment" src=""></iframe>
+
+    </body>
+
+</html>
