@@ -98,7 +98,7 @@
                 }
 
                 else if (p_data.visible === 'false') {
-                    
+
                     stopWidgetActivityWatcher();
                 }
             }
@@ -133,7 +133,10 @@
                 let timer_max = INACTIVITY_THRESHOLD_SECONDS_WIDGET * 1000;
 
                 inactivity_timer_widget = setTimeout(function() {
+                    
                     Helpshift('close');
+
+                    stopWidgetActivityWatcher();
 
                     console.log(`The timer threshold (${INACTIVITY_THRESHOLD_SECONDS_WIDGET}s) for inactivity on the widget has been reached, so the widget was closed.`);
                 }, timer_max);
