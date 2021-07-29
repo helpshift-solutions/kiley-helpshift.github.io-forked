@@ -90,14 +90,14 @@ console.log(p_data);
                     throw new TypeError(`The first parameter of this function must be an Object instance: ${p_data}`);
                 }
 console.log(`p_data.visible: ${p_data.visible}`);
-                if (p_data.visible === 'true') {
+                if (p_data.visible === true) {
                     
                     stopPageActivityWatcher();
 
                     console.log(`The widget was opened manually, so the page activity watcher was cleared.`);
                 }
 
-                else if (p_data.visible === 'false') {
+                else if (p_data.visible === false) {
 
                     stopWidgetActivityWatcher();
                 }
