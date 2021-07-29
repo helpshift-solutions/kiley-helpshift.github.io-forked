@@ -89,7 +89,7 @@
                 if (!(p_data instanceof Object)) {
                     throw new TypeError(`The first parameter of this function must be an Object instance: ${p_data}`);
                 }
-
+console.log(`p_data.visible: ${p_data.visible}`);
                 if (p_data.visible === 'true') {
                     
                     stopPageActivityWatcher();
