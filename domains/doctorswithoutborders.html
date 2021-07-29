@@ -5,11 +5,16 @@
         <script type="text/javascript">
 
             const INACTIVITY_THRESHOLD_SECONDS_PAGE = 3;
-            const INACTIVITY_THRESHOLD_SECONDS_WIDGET = 10;
+            const INACTIVITY_THRESHOLD_SECONDS_WIDGET = 5;
+
+            let inactivity_timer_page;
+            let inactivity_timer_widget;
 
             document.onreadystatechange = function() {
 
                 if (document.readyState === 'complete') {
+
+                    activateListeners();
 
                     loadHelpshiftChatWidget();
 
@@ -17,8 +22,10 @@
                 }
             }
 
-            let inactivity_timer_page;
-            let inactivity_timer_widget;
+            function activateListeners() {
+
+                Helpshift('addEventListener', 'messageAdd', handleEvent_messageAdd);
+            }
 
             function loadHelpshiftChatWidget() {
                 
@@ -39,6 +46,39 @@
                 Helpshift('show');
             }
 
+            function handleEvent_messageAdd(p_data) {
+
+                if (!(p_data instanceof Object)) {
+                    throw new TypeError(`The first parameter of this function must be an Object instance: ${p_data}`);
+                }
+
+                stopWidgetActivityWatcher();
+
+                console.log(`The user sent a message, so the widget activity watcher was cleared.`);
+            }
+
+            function handleEvent_pageActivity(p_data) {
+
+                if (!(p_data instanceof Object)) {
+                    throw new TypeError(`The first parameter of this function must be an Object instance: ${p_data}`);
+                }
+
+                stopPageActivityWatcher();
+
+                console.log(`Some activity occurred on the page, so the page activity watcher was cleared.`);
+            }
+
+            function handleEvent_messageAdd(p_data) {
+
+                if (!(p_data instanceof Object)) {
+                    throw new TypeError(`The first parameter of this function must be an Object instance: ${p_data}`);
+                }
+
+                stopWidgetActivityWatcher();
+
+                console.log(`The user sent a message, so the widget activity watcher was cleared.`);
+            }
+
             function startPageActivityWatcher() {
 
                 inactivity_timer_page = setTimeout(function() {
@@ -49,6 +89,18 @@
             function stopPageActivityWatcher() {
 
                 clearTimeout(inactivity_timer_page);
+            }
+
+            function startWidgetActivityWatcher() {
+
+                inactivity_timer_widget = setTimeout(function() {
+                    Helpshift('close');
+                }, INACTIVITY_THRESHOLD_SECONDS_WIDGET * 1000);
+            }
+
+            function stopWidgetActivityWatcher() {
+
+                clearTimeout(inactivity_timer_widget);
             }
 
         </script>
