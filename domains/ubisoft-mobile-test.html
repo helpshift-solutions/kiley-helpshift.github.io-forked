@@ -813,7 +813,9 @@
           }
 
           let event_to_post = {
-            visible: data.visible,
+            data: {
+              visible: data.visible
+            },
             message: 'widgetToggle',
           };
 
