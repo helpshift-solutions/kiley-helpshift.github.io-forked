@@ -10,7 +10,7 @@
         
             const page_params = new URLSearchParams(window.location.search);
 
-            let base_url = `https://kiley-helpshift.github.io/domains/ubisoft-mobile-test.html`;
+            const BASE_URL = `https://kiley-helpshift.github.io/domains/ubisoft-mobile-test.html`;
 
             $(document).ready(function() {
 
@@ -26,7 +26,7 @@
                 
                 page_parameters_string = page_parameters_array.join('&');
 
-                let full_iframe_target_url = base_url;
+                let full_iframe_target_url = BASE_URL;
                 
                 if (page_parameters_string.length > 0) {
 
