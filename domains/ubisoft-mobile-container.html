@@ -13,6 +13,8 @@
             const page_params = new URLSearchParams(window.location.search);
 
             const BASE_URL = `https://kiley-helpshift.github.io/domains/ubisoft-mobile.html`;
+            const HEIGHT_WHEN_ANDROID_KEYBOARD_SHOWING = '67%';
+            const HEIGHT_WHEN_ANDROID_KEYBOARD_NOT_SHOWING = '100%';
 
             $(document).ready(function() {
 
@@ -72,11 +74,11 @@
 
                     let flag_visibility = (event_object_data['visible'] === true);
                     
-                    let adjusted_height_for_keyboard = '100%';
+                    let adjusted_height_for_keyboard = HEIGHT_WHEN_ANDROID_KEYBOARD_NOT_SHOWING;
 
                     if (flag_visibility === true) {
 
-                        adjusted_height_for_keyboard = '67%';
+                        adjusted_height_for_keyboard = HEIGHT_WHEN_ANDROID_KEYBOARD_SHOWING;
                     }
 
                     if (deviceIsAndroid()) {
