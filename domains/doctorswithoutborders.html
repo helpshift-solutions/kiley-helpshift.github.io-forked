@@ -122,8 +122,11 @@
                 inactivity_interval_page = setInterval(function() {
 
                     let current_time = new Date();
+                    let elapsed_time = (current_time - time_started) / 1000;
 
-                    document.getElementById('elapsed_time_page_inactivity').innerText = (current_time - time_started);
+                    let elapsed_time_string = `${elapsed_time} seconds`;
+
+                    document.getElementById('elapsed_time_page_inactivity').innerText = elapsed_time_string;
                     
                 }, 250);
             }
@@ -133,7 +136,7 @@
                 let timer_max = INACTIVITY_THRESHOLD_SECONDS_WIDGET * 1000;
 
                 inactivity_timer_widget = setTimeout(function() {
-                    
+
                     Helpshift('close');
 
                     stopWidgetActivityWatcher();
@@ -145,8 +148,11 @@
                 inactivity_interval_widget = setInterval(function() {
 
                     let current_time = new Date();
+                    let elapsed_time = (current_time - time_started) / 1000;
 
-                    document.getElementById('elapsed_time_widget_inactivity').innerText = (current_time - time_started);
+                    let elapsed_time_string = `${elapsed_time} seconds`;
+
+                    document.getElementById('elapsed_time_widget_inactivity').innerText = elapsed_time_string;
                     
                 }, 250);
             }
