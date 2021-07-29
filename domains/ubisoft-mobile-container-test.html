@@ -1,0 +1,118 @@
+<html>
+    
+    <head>
+        
+        <meta charset="UTF-8" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+        
+            const page_params = new URLSearchParams(window.location.search);
+
+            const BASE_URL = `https://kiley-helpshift.github.io/domains/ubisoft-mobile.html`;
+            const HEIGHT_WHEN_ANDROID_KEYBOARD_SHOWING = '67%';
+            const HEIGHT_WHEN_ANDROID_KEYBOARD_NOT_SHOWING = '100%';
+
+            $(document).ready(function() {
+
+                let page_parameters_array = [];
+                let page_parameters_string = ``;
+
+                for (let current_parameter_key of page_params.keys()) {
+                    
+                    let current_parameter_value = page_params.get(current_parameter_key);
+                    let current_parameter_value_encoded = encodeURIComponent(current_parameter_value);
+                    page_parameters_array.push(`${current_parameter_key}=${current_parameter_value_encoded}`);
+                }
+                
+                page_parameters_string = page_parameters_array.join('&');
+
+                let full_iframe_target_url = BASE_URL;
+                
+                if (page_parameters_string.length > 0) {
+
+                    full_iframe_target_url = full_iframe_target_url + `?${page_parameters_string}`;
+                }
+
+                $('#page-containment').attr('src', full_iframe_target_url);
+            });
+
+            // Detects if the device that is loading the page is running the Android operating system
+            function deviceIsAndroid() {
+            
+                let user_agent = navigator.userAgent.toLowerCase();
+
+                // If the word "android" is found in the user agent string
+                if (user_agent.indexOf("android") > -1) {
+
+                    return true;
+                }
+
+                return false;
+            }
+
+            function handleEvent_widgetToggle(p_event) {
+                
+                let event_object = p_event['data'];
+                let event_origin = p_event['origin']
+
+                if (!(event_object instanceof Object)) {
+                    return false;
+                }
+
+                let event_object_message = event_object['message'];
+                let event_object_data = event_object['data'];
+
+                if (event_object_message === 'widgetToggle') {
+
+                    if (!(event_object_data instanceof Object)) {
+                        return false;
+                    }
+
+                    let flag_visibility = (event_object_data['visible'] === true);
+                    
+                    let adjusted_height_for_keyboard = HEIGHT_WHEN_ANDROID_KEYBOARD_NOT_SHOWING;
+
+                    if (flag_visibility === true) {
+
+                        adjusted_height_for_keyboard = HEIGHT_WHEN_ANDROID_KEYBOARD_SHOWING;
+                    }
+
+                    if (deviceIsAndroid()) {
+                        $('#page-containment').css('height',adjusted_height_for_keyboard);
+                    }
+                }
+            }
+
+            window.addEventListener("message", handleEvent_widgetToggle);
+        </script>
+
+        <style type="text/css">
+
+            BODY {
+                margin: 0;
+            }
+
+            #page-containment {
+                border: 0;
+                height: 100%;
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+            }
+
+        </style>
+
+    </head>
+    
+    <body>
+        
+        <iframe id="page-containment" src=""></iframe>
+
+    </body>
+
+</html>
