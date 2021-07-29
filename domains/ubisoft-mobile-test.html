@@ -811,6 +811,14 @@
             // $($('iframe')[2]).css('bottom','500px');
             // $('#hs-web-sdk-iframe').css('bottom','500px');
           }
+
+          let event_to_post = {
+            visible: data.visible,
+            message: 'widgetToggle',
+          };
+
+          // Bubble up an event to the parent iframe from here
+          window.parent.postMessage(event_to_post, '*');
         }
 
         //Event handler to listen for web chat widget changes
