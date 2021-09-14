@@ -1,9 +1,39 @@
 <html>
     <head>
 
+      <style type="text/css">
+
+        .input_field_password {
+          width: 300px;
+        }
+      
+      </style>
     </head>
     <body>
+
+      <form action="./" id="auth_form" method="post" name="auth_form" onsubmit="return validatePassword()">
+
+        <input class="input_field_password" name="input_field_password" type="password" placeholder="Enter the password..." />
+
+        <input type="submit" value="Login" />
+
+      </form>
+
       <script>
+        
+        function validatePassword() {
+          
+          let entered_password = document.forms['auth_form']['input_field_password'].value;
+
+            if (entered_password !== 'helpshift') {
+              alert(`Please enter the correct password to proceed.`);
+            }
+
+            Helpshift('show');
+            
+          return false;
+        }
+
         (function () {
             var PLATFORM_ID = "redplanethotels_platform_20210902212302459-86ebd750be146f3",
             DOMAIN = "redplanethotels",
@@ -12,7 +42,8 @@
             window.helpshiftConfig = {
               platformId: PLATFORM_ID,
               domain: DOMAIN,
-              language: LANGUAGE
+              language: LANGUAGE,
+              showLauncher: false
             };
           }) ();
         
