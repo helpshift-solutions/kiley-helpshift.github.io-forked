@@ -24,8 +24,9 @@
         function validatePassword() {
           
           let entered_password = document.forms['auth_form']['input_field_password'].value;
+          let entered_password_adjusted = `${entered_password}`.toLowerCase().trim();
 
-            if (entered_password !== 'helpshift') {
+            if (entered_password_adjusted !== 'helpshift') {
               alert(`Please enter the correct password to proceed.`);
             }
             
@@ -45,7 +46,9 @@
             platformId: PLATFORM_ID,
             domain: DOMAIN,
             language: LANGUAGE,
-            showLauncher: false
+            widgetOptions: {
+              showLauncher: false
+            }
           };
         }) ();
 
