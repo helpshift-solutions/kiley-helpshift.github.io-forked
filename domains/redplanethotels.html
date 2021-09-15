@@ -28,7 +28,7 @@
             if (entered_password !== 'helpshift') {
               alert(`Please enter the correct password to proceed.`);
             }
-
+            
             else {
               Helpshift('show');
             }
@@ -37,19 +37,22 @@
         }
 
         (function () {
-            var PLATFORM_ID = "redplanethotels_platform_20210902212302459-86ebd750be146f3",
-            DOMAIN = "redplanethotels",
-            LANGUAGE = "en";
+          var PLATFORM_ID = "redplanethotels_platform_20210915151202589-7479f0c8db738ef",
+          DOMAIN = "redplanethotels",
+          LANGUAGE = "en";
+
+          window.helpshiftConfig = {
+            platformId: PLATFORM_ID,
+            domain: DOMAIN,
+            language: LANGUAGE,
+            showLauncher: false
+          };
+        }) ();
+
+        !function(t,e){if("function"!=typeof window.Helpshift){var n=function(){n.q.push(arguments)};n.q=[],window.Helpshift=n;var i,a=t.getElementsByTagName("script")[0];if(t.getElementById(e))return;i=t.createElement("script"),i.async=!0,i.id=e,i.src="https://webchat.helpshift.com/latest/webChat.js";var o=function(){window.Helpshift("init")};window.attachEvent?i.attachEvent("onload",o):i.addEventListener("load",o,!1),a.parentNode.insertBefore(i,a)}else window.Helpshift("update")}(document,"hs-chat");
+
+        Helpshift('hide');
         
-            window.helpshiftConfig = {
-              platformId: PLATFORM_ID,
-              domain: DOMAIN,
-              language: LANGUAGE,
-              showLauncher: false
-            };
-          }) ();
-        
-          !function(t,e){if("function"!=typeof window.Helpshift){var n=function(){n.q.push(arguments)};n.q=[],window.Helpshift=n;var i,a=t.getElementsByTagName("script")[0];if(t.getElementById(e))return;i=t.createElement("script"),i.async=!0,i.id=e,i.src="https://webchat.helpshift.com/latest/webChat.js";var o=function(){window.Helpshift("init")};window.attachEvent?i.attachEvent("onload",o):i.addEventListener("load",o,!1),a.parentNode.insertBefore(i,a)}else window.Helpshift("update")}(document,"hs-chat");
-        </script>
+      </script>
     </body>
 </html>
