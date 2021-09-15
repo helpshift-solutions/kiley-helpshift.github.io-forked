@@ -25,7 +25,7 @@
           
           let entered_password = document.forms['auth_form']['input_field_password'].value;
           let entered_password_adjusted = `${entered_password}`.toLowerCase().trim();
-
+console.log(`entered_password_adjusted: ${entered_password_adjusted}`);
             if (entered_password_adjusted !== 'helpshift') {
               alert(`Please enter the correct password to proceed.`);
             }
@@ -47,13 +47,13 @@
             domain: DOMAIN,
             language: LANGUAGE,
             widgetOptions: {
-              showLauncher: false
+              // showLauncher: false
             }
           };
         }) ();
 
         !function(t,e){if("function"!=typeof window.Helpshift){var n=function(){n.q.push(arguments)};n.q=[],window.Helpshift=n;var i,a=t.getElementsByTagName("script")[0];if(t.getElementById(e))return;i=t.createElement("script"),i.async=!0,i.id=e,i.src="https://webchat.helpshift.com/webChat.js";var o=function(){window.Helpshift("init")};window.attachEvent?i.attachEvent("onload",o):i.addEventListener("load",o,!1),a.parentNode.insertBefore(i,a)}else window.Helpshift("update")}(document,"hs-chat");
-        
+        Helpshift('hide');
       </script>
     </body>
 </html>
